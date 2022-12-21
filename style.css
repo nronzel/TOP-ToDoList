@@ -1,0 +1,119 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+
+*, *:before, *:after {
+  padding: 0;
+  margin: 0;
+  font-size: 16px;
+}
+
+:root {
+  --dark-blue: #222831;
+  --med-blue: #393E46;
+  --white: #EEEEEE;
+  --primary-blue: #00ADB5;
+}
+
+body {
+  height: 100vh;
+  font-family: 'Nunito', sans-serif;
+}
+
+.main-container {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: 10% auto auto auto 5%;
+  height: 100%;
+}
+
+/* Header Content */
+.header {
+  grid-column: 1 / span 12;
+  grid-row: 1 / span 1;
+  background-color: var(--dark-blue);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 5px 5px 7px 0px rgba(0, 0, 0, 0.329);
+}
+
+.title {
+  font-size: 5rem;
+  color: var(--white);
+  font-weight: 700;
+}
+
+/* Sidebar Content */
+.sidebar {
+  grid-column: 1 / span 2;
+  grid-row: 2 / span 3;
+  background-color: var(--med-blue);
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-title {
+  color: var(--white);
+  border-bottom: 2px solid rgba(101, 101, 101, 0.827);
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 10px 0px 10px;
+}
+
+.nav-item {
+  font-size: 2rem;
+}
+
+.new-btn {
+  border: none;
+  background: none;
+  color: var(--white);
+  font-size: 1.5rem;
+}
+
+.nav-projects {
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-menu-list {
+  list-style: none;
+  background-color: var(--med-blue);
+  width: 100%;
+  color: var(--white);
+  margin-top: 10px;
+}
+
+.nav-menu-list > li {
+  padding: 10px 10px 10px 20px;
+  border-bottom: 1px solid rgba(101, 101, 101, 0.403);
+  font-size: 1rem;
+}
+
+.active {
+  background-color: var(--dark-blue);
+  font-weight: 600;
+  box-shadow: 3px 3px 2px 0px rgba(0, 0, 0, 0.243) inset;
+}
+
+/* Main Section */
+.list {
+  grid-column: 3 / 13;
+  grid-row: 2 / span 3;
+  background-color: var(--white);
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+/* Footer Content */
+.footer {
+  grid-column: 1 / span 12;
+  grid-row: 5 / span 1;
+  background-color: var(--dark-blue);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--med-blue);
+  box-shadow: 0px -5px 7px 0px rgba(0, 0, 0, 0.329);
+}
