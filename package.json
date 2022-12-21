@@ -1,0 +1,25 @@
+{
+  "name": "top-todolist",
+  "version": "1.0.0",
+  "description": "The Odin Project - To Do List",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "npx webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nronzel/TOP-ToDoList.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nronzel/TOP-ToDoList/issues"
+  },
+  "homepage": "https://github.com/nronzel/TOP-ToDoList#readme",
+  "devDependencies": {
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1"
+  }
+}
