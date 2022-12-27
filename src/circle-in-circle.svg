@@ -1,3 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="20.088" height="20.087" viewBox="0 0 20.088 20.087">
-  <path d="M10.044,0A10.044,10.044,0,1,0,20.088,10.043,10.043,10.043,0,0,0,10.044,0Zm.047,15.033a4.99,4.99,0,1,1,4.99-4.99A4.989,4.989,0,0,1,10.091,15.033Z"/>
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="640" height="480" viewBox="0 0 640 480" xml:space="preserve">
+<desc>Created with Fabric.js 3.6.6</desc>
+<defs>
+</defs>
+<g transform="matrix(22.74 0 0 22.74 318.75 245.75)"  >
+<path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(118,126,130); fill-rule: nonzero; opacity: 1;"  transform=" translate(-10.04, -10.04)" d="M 10.044 0 A 10.044 10.044 0 1 0 20.088 10.043 A 10.043 10.043 0 0 0 10.044 0 Z m 0.047 15.033 a 4.99 4.99 0 1 1 4.99 -4.99 A 4.989 4.989 0 0 1 10.091 15.033 Z" stroke-linecap="round" />
+</g>
 </svg>
