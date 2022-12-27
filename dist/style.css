@@ -109,7 +109,7 @@ body {
 }
 
 .todo-container {
-  width: 1500px;
+  /* width: 1500px; */
   background-color: var(--dark-blue);
   height: fit-content;
   display: flex;
@@ -123,19 +123,58 @@ body {
   gap: 1rem;
 }
 
-.to-do {
-  height: 200px;
-  width: 95%;
-  background-color: var(--med-blue);
-  border-radius: 25px;
-}
-
 .new-todo-btn {
   border: none;
   background: none;
   font-size: 4rem;
   color: var(--white);
   height: auto;
+}
+
+/* Todo Cards */
+.to-do {
+  height: 50px;
+  width: 500px;
+  background-color: var(--med-blue);
+  border-radius: 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
+
+.complete-btn {
+  background: none;
+  border: none;
+}
+
+.task {
+  color: var(--white);
+}
+
+.due {
+  color: var(--white);
+  font-size: .8rem;
+  cursor: default;
+}
+
+.small-svg {
+  width: 25px;
+  cursor: pointer;
+}
+
+.small-svg:hover {
+  scale: 1.1;
+}
+
+.task {
+  font-size: 1.2rem;
+  cursor: default;
+}
+
+.complete {
+  text-decoration: line-through;
+  background-color: #2d3137;
 }
 
 /* Footer Content */
@@ -148,4 +187,5 @@ body {
   align-items: center;
   color: var(--med-blue);
   box-shadow: 0px -5px 7px 0px rgba(0, 0, 0, 0.329);
+  z-index: 3;
 }
