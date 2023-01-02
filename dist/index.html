@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
-    <script type="module" src="/main.js"></script>
+    <script type="module" src="../dist/main.js"></script>
     <title>ToDo List</title>
   </head>
   <body>
@@ -16,28 +16,39 @@
       <div class="sidebar">
         <div class="nav-title">
           <p class="nav-item">Projects</p>
-          <button class="new-btn">+</button>
+          <button class="new-project-btn">+</button>
         </div>
         <div class="nav-projects">
           <ul class="nav-menu-list">
-            <li class="active"><button class="nav-btn">ToDo App</button><p class="small-svg">X</p></li>
+            <li class="active">
+              <button class="nav-btn">ToDo App</button>
+              <button class="task-icon">X</button>
+            </li>
             <li><button class="nav-btn">Learn Javascript</button></li>
           </ul>
         </div>
       </div>
       <div class="list">
         <div class="todo-container">
-          <button class="new-todo-btn">+</button>
-          <div class="to-do">
-            <img class="task-icon" src="../src/circle-in-circle.svg" alt="task-not-complete">
-            <p class="task">Finish the wireframe</p>
-            <p class="due">Due |</p>
-            <img class="task-icon" src="../src/trash.svg" alt="trash-can">
+          <button class="new-task-btn">+</button>
+          <div class="task">
+            <img
+              class="task-icon"
+              src="../src/circle-in-circle.svg"
+              alt="task-not-complete"
+            />
+            <p class="task-subject">Finish the wireframe</p>
+            <p class="due">Due | 01/12/2023</p>
+            <img class="task-icon" src="../src/trash.svg" alt="trash-can" />
           </div>
-          <div class="to-do complete">
-            <img class="task-icon" src="../src/circle-check.svg" alt="task-not-complete">
-            <p class="task complete">pick color scheme</p>
-            <img class="task-icon" src="../src/trash.svg" alt="trash-can">
+          <div class="task complete">
+            <img
+              class="task-icon"
+              src="../src/circle-check.svg"
+              alt="task-complete"
+            />
+            <p class="task-subject complete">pick color scheme</p>
+            <img class="task-icon" src="../src/trash.svg" alt="trash-can" />
           </div>
         </div>
       </div>
