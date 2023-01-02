@@ -80,12 +80,17 @@ li > button {
   font-size: 2rem;
 }
 
-.new-btn {
+.new-project-btn {
   border: none;
   background: none;
   color: var(--white);
   font-size: 1.5rem;
+  
+}
+
+.new-project-btn:hover {
   cursor: pointer;
+  scale: 1.2;
 }
 
 .nav-btn {
@@ -146,7 +151,7 @@ li > button {
   gap: 1rem;
 }
 
-.new-todo-btn {
+.new-task-btn {
   border: none;
   background: none;
   font-size: 4rem;
@@ -155,8 +160,8 @@ li > button {
   cursor: pointer;
 }
 
-/* Todo Cards */
-.to-do {
+/* To-Do Card */
+.task {
   height: 50px;
   width: 500px;
   background-color: var(--med-blue);
@@ -172,7 +177,7 @@ li > button {
   border: none;
 }
 
-.task {
+.task-subject {
   color: var(--white);
   font-size: 1.2rem;
 }
@@ -184,6 +189,10 @@ li > button {
 
 .task-icon {
   width: 25px;
+  text-align: center;
+  background: none;
+  border: none;
+  color:rgb(156, 156, 156);
 }
 
 .task-icon:hover {
@@ -194,6 +203,7 @@ li > button {
 .complete {
   text-decoration: line-through;
   background-color: #2d3137;
+  color:rgb(101, 101, 101)
 }
 
 /* Footer Content */
