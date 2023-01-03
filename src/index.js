@@ -20,9 +20,11 @@ const clearProjectListDisplay = () => {
 
 const drawProjectList = () => {
   clearProjectListDisplay();
+
   projectList.forEach((project) => {
     const li = document.createElement("li");
     const navBtn = document.createElement("button");
+
     navBtn.textContent = project.title;
     navBtn.classList.add("nav-btn");
     li.append(navBtn);
@@ -45,8 +47,10 @@ const clearNavClasses = () => {
 
 const navActive = (e) => {
   const btn = document.createElement("button");
+
   btn.textContent = "X";
   btn.classList.add("remove-btn");
+  
   if (e.target.parentElement.classList.contains("active")) {
     return;
   } else {
