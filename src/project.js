@@ -1,11 +1,10 @@
 class Project {
   constructor(title) {
-    this.title = title,
-    this.tasks = []
+    (this.title = title), (this.tasks = []);
   }
 
   getNumberOfTasks() {
-    return this.tasks.length();
+    return this.tasks.length;
   }
 
   getTask(title) {
@@ -18,11 +17,6 @@ class Project {
 
   removeTask(title) {
     return (this.tasks = this.tasks.filter((task) => task.title !== title));
-  }
-
-  markComplete() {
-    // change DOM to visually appear as completed. 
-    // Change icon to green check, strikethrough text and make it grey
   }
 }
 
