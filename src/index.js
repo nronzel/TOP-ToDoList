@@ -1,19 +1,12 @@
-import { Project } from "../src/project.js";
 import { Task } from "../src/task.js";
-import { ProjectList } from "../src/projectList.js"
 import { openModal, closeModal, getModalTitle } from "../src/modal.js";
+import { Project, ProjectList } from "./crud.js"
 
-// creates master list of projects; each project has its own list of tasks
-const list = new ProjectList()
-
-// dummy projects
-const proj1 = new Project("Project1")
-const proj2 = new Project("Project2")
-
-// create task
-proj1.addTask(new Task('test task'))
-proj1.addTask(new Task('hope this works'))
-
+// ProjectList is a an object that contains a list to house all projects, 
+//   and methods to add/remove/get.
+// Project is a class that creates new projects 
+//   with their own list that contains tasks for that project
+//   as well as methods to add/remove/get tasks
 
 //
 // Dom manipulation stuff
@@ -31,41 +24,48 @@ const domCache = {
 };
 
 const makeCardActive = (li) => {
-  li.classList.add("active")
-  let removeBtn = document.createElement("button")
-  removeBtn.textContent = "X"
-  removeBtn.classList.add("remove-btn")
-  li.append(removeBtn)
-}
+  let removeBtn = document.createElement("button");
+  if (li.classList.contains("active")) {
+    return;
+  } else {
+    li.classList.add("active");
+    removeBtn.textContent = "X";
+    removeBtn.classList.add("remove-btn");
+    li.append(removeBtn);
+  }
+};
 
 const makeProjectCards = (project) => {
   clearProjectListDisplay();
-  list.projects.forEach((project) => {
-    let li = document.createElement("li")
-    let btn = document.createElement("button")
-    btn.textContent = project.title
-    btn.classList.add("nav-btn")
-    li.append(btn)
-    domCache.projectNavList.append(li)
-    if (list.projects.length == 1) {
-      makeCardActive(li)
+  ProjectList.list.forEach((project) => {
+    let li = document.createElement("li");
+    let btn = document.createElement("button");
+    btn.textContent = project.title;
+    btn.classList.add("nav-btn");
+    li.append(btn);
+    domCache.projectNavList.append(li);
+    if (ProjectList.list.length < 2) {
+      makeCardActive(li);
+    } else {
+      let li = domCache.projectNavList.firstChild;
+      makeCardActive(li);
     }
-    btn.onclick = navActive
-  })
-}
+    btn.onclick = navActive;
+  });
+};
 
 const getNewProject = () => {
   let title = getModalTitle();
   if (title === undefined || title.length < 1) {
-    return
+    return;
   } else {
-    let project = new Project(title)
-    list.addProject(project)
-    makeProjectCards(project)
+    let project = new Project(title);
+    ProjectList.add(project);
+    makeProjectCards(project);
     domCache.modalInput.value = "";
     closeModal();
   }
-}
+};
 
 const clearNavClasses = () => {
   const allNavBtns = document.querySelectorAll(".nav-btn");
@@ -78,26 +78,12 @@ const clearNavClasses = () => {
   });
 };
 
-const drawProjectList = () => {
-  clearProjectListDisplay();
-  projectList.forEach((project) => {
-    const li = document.createElement("li");
-    const navBtn = document.createElement("button");
-    navBtn.textContent = project.title;
-    navBtn.classList.add("nav-btn");
-    li.append(navBtn);
-    domCache.projectNavList.append(li);
-    navBtn.onclick = navActive;
-  });
-};
-
 const clearProjectListDisplay = () => {
   domCache.projectNavList.innerHTML = "";
 };
 
 const navActive = (e) => {
   const btn = document.createElement("button");
-
   btn.textContent = "X";
   btn.classList.add("remove-btn");
   btn.onclick = removeProject;
@@ -114,16 +100,25 @@ const navActive = (e) => {
 const removeProject = (e) => {
   let projTitle = e.target.previousSibling.textContent;
   e.target.parentElement.outerHTML = "";
-  list.removeProject(projTitle)
-  console.log(list.projects)
-  // list.projects.splice(projectList.findIndex((project) => project.title == projTitle), 1)
+  ProjectList.remove(projTitle);
 };
 
-domCache.newProjectBtn.onclick = openModal
+domCache.newProjectBtn.onclick = openModal;
 domCache.modalSubmit.onclick = getNewProject;
 domCache.overlay.onclick = closeModal;
 domCache.modalCloseBtn.onclick = closeModal;
 
-// test project
-list.addProject(proj1)
+// test projects
+const proj1 = new Project("Project1");
+const proj2 = new Project("Project2");
+const proj3 = new Project("Project3");
+ProjectList.add(proj1);
+ProjectList.add(proj2);
+ProjectList.add(proj3);
 makeProjectCards(proj1);
+makeProjectCards(proj2);
+makeProjectCards(proj3);
+
+// create task
+proj1.add(new Task("test task"));
+proj1.add(new Task("hope this works"));
