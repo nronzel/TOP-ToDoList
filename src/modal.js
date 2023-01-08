@@ -1,10 +1,10 @@
 const modalCache = {
   overlay: document.querySelector(".overlay"),
   projModal: document.querySelector(".new-proj-modal"),
-  modalInput: document.querySelector(".new-project-input"),
+  projModalInput: document.querySelector(".new-project-input"),
 };
 
-const openModal = () => {
+const openProjModal = () => {
   modalCache.projModal.classList.add("active");
   modalCache.overlay.classList.add("active");
 };
@@ -12,11 +12,11 @@ const openModal = () => {
 const closeModal = () => {
   modalCache.projModal.classList.remove("active");
   modalCache.overlay.classList.remove("active");
-  modalCache.modalInput.value = "";
+  modalCache.projModalInput.value = "";
 };
 
-const getModalTitle = () => {
-  return modalCache.modalInput.value;
+const getProjModalTitle = () => {
+  return modalCache.projModalInput.value;
 };
 
-export { openModal, closeModal, getModalTitle };
+export { openProjModal, closeModal, getProjModalTitle };

@@ -1,16 +1,16 @@
 import { Task } from "../src/task.js";
-import { openProjModal, closeModal, getProjModalTitle } from "../src/modal.js";
-import { Project, ProjectList } from "./crud.js"
+import { openProjModal, closeModal, getProjModalTitle } from "./modal.js";
+import { Project, ProjectList } from "./crud.js";
 
 // ProjectList is a an object that contains a list to house all projects
 //   plus methods to add/remove/get.
 
-// Project is a class that creates new projects 
+// Project is a class that creates new projects
 //   with their own list that contains tasks for each project
 //   as well as methods to add/remove/get tasks
 
 //
-// Dom manipulation stuff
+// Project Dom Manipulation
 //
 
 const domCache = {
@@ -62,7 +62,7 @@ const getNewProject = () => {
   } else {
     let project = new Project(title);
     ProjectList.add(project);
-    drawProjectCards()
+    drawProjectCards();
     domCache.modalInput.value = "";
     closeModal();
   }
@@ -109,75 +109,79 @@ domCache.modalSubmit.onclick = getNewProject;
 domCache.overlay.onclick = closeModal;
 domCache.modalCloseBtn.onclick = closeModal;
 
-
-
-
-// Tasks
+//
+// Tasks Dom Manipulation
+//
 const taskCache = {
   newTaskBtn: document.querySelector(".new-task-btn"),
-  taskListContainer: document.querySelector(".todo-container"),
-  taskList: document.querySelector('.task-list')
-}
+  taskList: document.querySelector(".task-list"),
+};
 
 const drawTaskCards = (project) => {
-  clearTaskDisplay() // TODO define this
-  console.log(project)
+  clearTaskDisplay();
   project.list.forEach((task) => {
-    let taskContainer = document.createElement("div")
-    let taskIcon = document.createElement("img")
-    let taskSubject = document.createElement("p")
-    let removeBtn = document.createElement("img")
+    let taskContainer = document.createElement("div");
+    let taskIcon = document.createElement("img");
+    let taskSubject = document.createElement("p");
+    let removeBtn = document.createElement("img");
 
-    taskContainer.classList.add("task")
-    taskIcon.src = "../src/circle-in-circle.svg"
-    taskIcon.classList.add("task-icon")
-    taskIcon.classList.add("complete-btn")
-    taskIcon.alt = "task-not-complete"
+    // add classes
+    taskContainer.classList.add("task");
+    taskSubject.classList.add("task-subject");
+    removeBtn.classList.add("task-icon");
+    taskIcon.classList.add("task-icon");
+    taskIcon.classList.add("complete-btn");
 
-    taskSubject.classList.add("task-subject")
-    taskSubject.textContent = task.title
+    // add IMG sources and alt tags
+    taskIcon.src = "../src/circle-in-circle.svg";
+    taskIcon.alt = "task-not-complete";
+    removeBtn.src = "../src/trash.svg";
+    removeBtn.alt = "trash-can";
 
-    removeBtn.classList.add("task-icon")
-    removeBtn.src = "../src/trash.svg"
-    removeBtn.alt = "trash-can"
+    // apply the actual text content of the task
+    taskSubject.textContent = task.title;
 
+    // applies custom attribute with the title of the project the task belongs to
+    taskContainer["projectTitle"] = project.title
 
-    taskIcon.onclick = completeTask
-    removeBtn.onclick = removeTaskCard
+    taskIcon.onclick = completeTask;
+    removeBtn.onclick = removeTaskCard;
 
-    taskContainer.append(taskIcon)
-    taskContainer.append(taskSubject)
-    taskContainer.append(removeBtn)
-
-    taskCache.taskListContainer.append(taskContainer)
-  })
-}
+    taskContainer.append(taskIcon);
+    taskContainer.append(taskSubject);
+    taskContainer.append(removeBtn);
+    taskCache.taskList.append(taskContainer);
+  });
+};
 
 const removeTaskCard = (e) => {
-  e.target.parentElement.outerHTML = ""
-}
+  let taskTitle = e.target.previousSibling.textContent
+  let projectTitle = e.target.parentElement.projectTitle
+  let project = ProjectList.get(projectTitle)
+  e.target.parentElement.outerHTML = "";
+  project.remove(taskTitle)
+};
 
 const completeTask = (e) => {
-  let completeBtn = e.target
+  let completeBtn = e.target;
   if (completeBtn.parentElement.classList.contains("complete")) {
-    completeBtn.src = "../src/circle-in-circle.svg"
-    completeBtn.classList.remove("complete")
-    completeBtn.parentElement.classList.remove("complete")
-    completeBtn.nextSibling.style.color = "var(--white)"
+    completeBtn.src = "../src/circle-in-circle.svg";
+    completeBtn.classList.remove("complete");
+    completeBtn.parentElement.classList.remove("complete");
+    completeBtn.nextSibling.style.color = "var(--white)";
   } else {
-    completeBtn.src = "../src/circle-check.svg"
-    completeBtn.parentElement.classList.add("complete")
-    completeBtn.nextSibling.style.color = "#656565"
+    completeBtn.src = "../src/circle-check.svg";
+    completeBtn.parentElement.classList.add("complete");
+    completeBtn.nextSibling.style.color = "#656565";
   }
-
-}
+};
 
 const clearTaskDisplay = () => {
-  console.log('cleared')
-}
+  taskCache.taskList.innerHTML = ""
+  console.log("cleared");
+};
 
 // taskCache.newTaskBtn.onclick =
-
 
 // test projects
 const proj1 = new Project("Project1");
@@ -190,8 +194,8 @@ drawProjectCards(proj1);
 drawProjectCards(proj2);
 drawProjectCards(proj3);
 
-// create task
-proj1.add(new Task("test task"));
-proj1.add(new Task("hope this works"));
+// test tasks
+proj1.add(new Task("task1"));
+proj1.add(new Task("task2"));
 
-drawTaskCards(proj1)
+drawTaskCards(proj1);
