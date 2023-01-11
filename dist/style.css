@@ -14,6 +14,7 @@
   --white: #eeeeee;
   --primary-blue: #00adb5;
   --lt-grey: rgba(0, 0, 0, 0.329);
+  --lt-blue-border: 2px solid #00acb512;
 }
 
 body {
@@ -25,14 +26,7 @@ p {
   cursor: default;
 }
 
-li {
-  cursor: default;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-li > button {
+svg:hover {
   cursor: pointer;
 }
 
@@ -52,7 +46,7 @@ li > button {
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 5px 5px 7px 0px rgba(0, 0, 0, 0.329);
+  box-shadow: 5px 5px 7px 0px var(--lt-grey);
   border-bottom: 1px solid #00acb515;
   z-index: 2;
 }
@@ -74,7 +68,7 @@ li > button {
 
 .nav-section {
   color: var(--white);
-  border-bottom: 2px solid #00acb555;
+  border-bottom: var(--lt-blue-border);
   display: flex;
   justify-content: space-between;
   padding: 10px 10px 0px 10px;
@@ -110,8 +104,24 @@ li > button {
   background-color: var(--dark-blue);
 }
 
-.nav-btn-left > span {
-  padding-left: 10px;
+.nav-btn-left>svg{
+  padding-right: 10px;
+}
+
+.new-project-btn {
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+}
+
+.nav-btn-right,
+.remove-task-svg {
+  visibility: hidden;
+}
+
+.nav-btn:hover .nav-btn-right,
+.task:hover .remove-task-svg {
+  visibility: visible;
 }
 
 .active {
@@ -142,44 +152,76 @@ li > button {
   flex-shrink: 1;
   padding: 2rem;
   margin-top: 30px;
-  gap: 1rem;
+  gap: 5px;
 }
 
-.new-task-btn {
-  border: none;
+.new-task-btn{
   background: none;
+  border: none;
   color: var(--white);
-  cursor: pointer;
-  padding: 0.5rem;
-  border-radius: 5px;
+  margin-bottom: 10px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
   width: 100%;
+  padding: 10px;
+  border-radius: 5px;
 }
 
 .new-task-btn:hover {
   background-color: var(--med-blue);
+  cursor: pointer;
 }
+
+.blue-svg {
+  color: var(--primary-blue);
+  font-size: 1rem;
+}
+
 
 /* Task Card */
 .task {
   width: 100%;
-  background-color: var(--med-blue);
+  /* background-color: var(--med-blue); */
+  background-color: var(--dark-blue);
   border-radius: 5px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px;
   color: var(--white);
-  border: none;
+  border: 1px solid var(--med-blue);
 }
 
-.task-left > span {
-  padding-left: 15px;
-  cursor: default;
+.task:hover {
+  background-color: var(--med-blue);
 }
 
-.task-left > svg:hover {
-  cursor: pointer;
+.task-left {
+  display: flex;
+  gap: 25px;
+  align-items: center;
 }
+
+.task-right {
+  display: flex;
+  align-items: center;
+  gap: 35px;
+}
+
+.remove-task-svg {
+  visibility: hidden;
+}
+
+.task:hover .remove-task-svg{
+  visibility: visible;
+}
+
+.due-date {
+  font-size: .7rem;
+}
+
 
 /* Footer Content */
 .footer {
@@ -189,9 +231,22 @@ li > button {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: var(--med-blue);
   box-shadow: 0px -5px 7px 0px var(--lt-grey);
-  border-top: 1px solid #00acb515;
+  border-top: var(--lt-blue-border);
   z-index: 3;
-  height: auto;
+}
+
+.footer-text {
+  color: var(--white);
+}
+
+
+
+.github-logo {
+  margin-left: 10px;
+}
+
+.github-logo > svg {
+  font-size: 20px;
+  color: var(--primary-blue);
 }

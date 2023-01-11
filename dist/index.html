@@ -10,12 +10,12 @@
       src="https://kit.fontawesome.com/23bb90498d.js"
       crossorigin="anonymous"
     ></script>
-    <title>ToDo List</title>
+    <title>Todo List</title>
   </head>
   <body>
     <div class="main-container">
       <div class="header">
-        <p class="title">ToDo List</p>
+        <p class="title">Todo List</p>
       </div>
       <div class="sidebar">
         <div class="nav-title">
@@ -25,7 +25,7 @@
           <button class="nav-btn active">
             <div class="nav-btn-left">
               <i class="fa-solid fa-list-check"></i>
-              <span>Project 1</span>
+              Project 1
             </div>
             <div class="nav-btn-right">
               <i class="fa-solid fa-xmark"></i>
@@ -34,34 +34,52 @@
           <button class="nav-btn">
             <div class="nav-btn-left">
               <i class="fa-solid fa-list-check"></i>
-              <span>Project 2</span>
+              Project 2
             </div>
-            <div class="nav-btn-right"></div>
+            <div class="nav-btn-right">
+              <i class="fa-solid fa-xmark"></i>
+            </div>
           </button>
           <button class="nav-btn new-project-btn">
-            <div class="nav-btn-left">
-              <i class="fa-solid fa-plus"></i>
-              <span>New Project</span>
-            </div>
-            <div class="nav-btn-right"></div>
+            <i class="fa-solid fa-plus blue-svg"></i>
+            New Project
           </button>
         </div>
       </div>
       <div class="task-section">
         <div class="task-container">
           <button class="new-task-btn">
-            <i class="fa-solid fa-circle-plus"></i>
+            <i class="fa-solid fa-circle-plus blue-svg"></i>
             <span>Add Task</span>
           </button>
           <button class="task">
             <div class="task-left">
-              <i class="fa-regular fa-circle"></i>
-              <span>Do Laundry</span>
+              <i class="fa-regular fa-circle blue-svg"></i>
+              <p class="task-subject">Go pee</p>
+            </div>
+            <div class="task-right">
+              <p class="due-date">No Due Date</p>
+              <i class="fa-solid fa-xmark remove-task-svg"></i>
+            </div>
+          </button>
+          <button class="task">
+            <div class="task-left">
+              <i class="fa-regular fa-circle blue-svg"></i>
+              <span>Go poo</span>
+            </div>
+            <div class="task-right">
+              <p class="due-date">No Due Date</p>
+              <i class="fa-solid fa-xmark remove-task-svg"></i>
             </div>
           </button>
         </div>
       </div>
-      <div class="footer">Copyright 2022 nronzel</div>
+      <div class="footer">
+        <p class="footer-text">Copyright © 2023 nronzel</p>
+        <a class="github-logo" href="https://github.com/nronzel">
+          <i class="fa-brands fa-github"></i>
+        </a>
+      </div>
     </div>
   </body>
 </html>
