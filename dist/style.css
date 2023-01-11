@@ -1,6 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Nunito&display=swap");
 
-*, *:before, *:after {
+*,
+*:before,
+*:after {
   padding: 0;
   margin: 0;
   font-size: 16px;
@@ -8,15 +10,15 @@
 
 :root {
   --dark-blue: #222831;
-  --med-blue: #393E46;
-  --white: #EEEEEE;
-  --primary-blue: #00ADB5;
+  --med-blue: #393e46;
+  --white: #eeeeee;
+  --primary-blue: #00adb5;
   --lt-grey: rgba(0, 0, 0, 0.329);
 }
 
 body {
   height: 100vh;
-  font-family: 'Nunito', sans-serif;
+  font-family: "Nunito", sans-serif;
 }
 
 p {
@@ -108,7 +110,7 @@ li > button {
   background-color: var(--dark-blue);
 }
 
-.nav-btn-left>span {
+.nav-btn-left > span {
   padding-left: 10px;
 }
 
@@ -148,7 +150,7 @@ li > button {
   background: none;
   color: var(--white);
   cursor: pointer;
-  padding: .5rem;
+  padding: 0.5rem;
   border-radius: 5px;
   width: 100%;
 }
@@ -170,92 +172,12 @@ li > button {
   border: none;
 }
 
-.task-left>span{
+.task-left > span {
   padding-left: 15px;
   cursor: default;
 }
 
-.task-left>svg:hover {
-  cursor: pointer;
-}
-
-/* MODAL */
-
-.modal {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0);
-  background-color: var(--dark-blue);
-  z-index: 2;
-  display: flex;
-  flex-flow: column;
-  justify-content: space-between;
-  align-items: center;
-  gap: 2rem;
-  padding: 25px 30px 30px 30px;
-  border-radius: 15px;
-  border: 2px solid #2f3846;
-}
-
-.modal.active {
-  transform: translate(-50%, -50%) scale(1);
-}
-
-.overlay.active {
-  display: block;
-}
-
-.overlay {
-  background-color:var(--lt-grey);
-  z-index: 1;
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  display: none;
-}
-.modal-input {
-  width: 200px;
-  height: 30px;
-  border-radius: 5px;
-  background-color: var(--med-blue);
-  color: var(--white);
-  padding: 0px 5px 5px 5px;
-  border: 2px solid #49515d;
-}
-
-.modal-submit {
-  padding: 15px 25px;
-  background-color: var(--primary-blue);
-  border: 2px solid var(--med-blue);
-  border-radius: 10px;
-}
-
-.modal-submit:hover {
-  cursor: pointer;
-}
-
-.modal-header {
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-}
-
-.large {
-  font-size: 24px;
-  color: var(--white);
-}
-
-.close {
-  color: var(--white);
-  border: none;
-  background: none;
-  font-weight: 100;
-}
-
-.close:hover {
+.task-left > svg:hover {
   cursor: pointer;
 }
 
@@ -271,4 +193,5 @@ li > button {
   box-shadow: 0px -5px 7px 0px var(--lt-grey);
   border-top: 1px solid #00acb515;
   z-index: 3;
+  height: auto;
 }
