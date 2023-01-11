@@ -1,6 +1,7 @@
 import { Task } from "../src/task.js";
 import { openProjModal, closeModal, getProjModalTitle } from "./modal.js";
 import { Project, ProjectList } from "./crud.js";
+import { Modal } from "./modal2.js";
 
 // ProjectList is a an object that contains a list to house all projects
 //   plus methods to add/remove/get.
@@ -13,15 +14,23 @@ import { Project, ProjectList } from "./crud.js";
 // Project Dom Manipulation
 //
 
+// create & initialize the modals
+const newProjModal = new Modal("New Project")
+const newTaskModal = new Modal("New Task")
+newProjModal.initialize()
+newTaskModal.initialize()
+
+
+
 const domCache = {
   newProjectBtn: document.querySelector(".new-project-btn"),
   projectNavList: document.querySelector(".nav-menu-list"),
   navBtn: document.querySelector(".nav-btn"),
   overlay: document.querySelector(".overlay"),
-  projModal: document.querySelector(".new-proj-modal"),
-  modalSubmit: document.querySelector(".new-project-submit"),
-  modalInput: document.querySelector(".new-project-input"),
-  modalCloseBtn: document.querySelector(".close"),
+  // projModal: document.querySelector(".new-proj-modal"),
+  // projModalSubmit: document.querySelector(".modal-submit.project-submit"),
+  // modalInput: document.querySelector(".new-project-input"),
+  // projModalCloseBtn: document.querySelector(".close.proj-close"),
 };
 
 const makeCardActive = (li) => {
@@ -104,10 +113,15 @@ const removeProject = (e) => {
   ProjectList.remove(projTitle);
 };
 
-domCache.newProjectBtn.onclick = openProjModal;
-domCache.modalSubmit.onclick = getNewProject;
-domCache.overlay.onclick = closeModal;
-domCache.modalCloseBtn.onclick = closeModal;
+domCache.newProjectBtn.onclick = newProjModal.open;
+// domCache.projModalSubmit.onclick = getNewProject;
+domCache.overlay.onclick = closeAllModals;
+// domCache.projModalCloseBtn.onclick = closeModal;
+
+const closeAllModals = () => {
+  newProjModal.close()
+  newTaskModal.close()
+}
 
 //
 // Tasks Dom Manipulation
@@ -178,7 +192,6 @@ const completeTask = (e) => {
 
 const clearTaskDisplay = () => {
   taskCache.taskList.innerHTML = ""
-  console.log("cleared");
 };
 
 // taskCache.newTaskBtn.onclick =

@@ -51,6 +51,7 @@ li > button {
   justify-content: center;
   align-items: center;
   box-shadow: 5px 5px 7px 0px rgba(0, 0, 0, 0.329);
+  border-bottom: 1px solid #00acb515;
   z-index: 2;
 }
 
@@ -69,94 +70,72 @@ li > button {
   flex-direction: column;
 }
 
-.nav-title {
+.nav-section {
   color: var(--white);
-  border-bottom: 2px solid rgba(101, 101, 101, 0.827);
+  border-bottom: 2px solid #00acb555;
   display: flex;
   justify-content: space-between;
   padding: 10px 10px 0px 10px;
+  font-size: 1.5rem;
 }
 
 .nav-item {
   font-size: 2rem;
 }
 
-.new-project-btn {
-  border: none;
-  background: none;
-  color: var(--white);
-  font-size: 1.5rem;
-  
-}
-
-.new-project-btn:hover {
-  cursor: pointer;
-  scale: 1.2;
+.nav-projects {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 5px;
+  gap: 5px;
 }
 
 .nav-btn {
   border: none;
   background: none;
   color: var(--white);
-}
-
-.nav-projects {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  width: 95%;
+  align-items: center;
+  padding: 10px;
+  border-radius: 5px;
 }
 
-.nav-menu-list {
-  list-style: none;
-  background-color: var(--med-blue);
-  width: 100%;
-  color: var(--white);
-  margin-top: 10px;
+.nav-btn:hover {
+  cursor: pointer;
+  background-color: var(--dark-blue);
 }
 
-.remove-btn {
-  width: 25px;
-  text-align: center;
-  background: none;
-  border: none;
-  color:rgb(156, 156, 156);
-}
-
-.remove-btn:hover {
-  scale: 1.2;
-}
-
-.nav-menu-list > li {
-  padding: 10px 10px 10px 20px;
-  border-bottom: 1px solid rgba(101, 101, 101, 0.403);
-  font-size: 1rem;
+.nav-btn-left>span {
+  padding-left: 10px;
 }
 
 .active {
   background-color: var(--dark-blue);
-  font-weight: 600;
   box-shadow: 3px 3px 2px 0px rgba(0, 0, 0, 0.243) inset;
 }
 
 /* Main Section */
-.list {
+.task-section {
   grid-column: 3 / 13;
   grid-row: 2 / span 3;
-  background-color: var(--white);
+  background-color: var(--dark-blue);
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
   align-items: center;
   z-index: 1;
 }
 
-.todo-container {
-  /* width: 1500px; */
+.task-container {
+  width: 800px;
   background-color: var(--dark-blue);
   height: fit-content;
   display: flex;
+  flex-flow: column;
   justify-content: flex-start;
   align-items: center;
-  flex-direction: column;
   border-radius: 15px;
   flex-shrink: 1;
   padding: 2rem;
@@ -167,67 +146,42 @@ li > button {
 .new-task-btn {
   border: none;
   background: none;
-  font-size: 4rem;
   color: var(--white);
-  height: auto;
   cursor: pointer;
+  padding: .5rem;
+  border-radius: 5px;
+  width: 100%;
 }
 
-/* To-Do Card */
-.task {
-  height: 50px;
-  width: 500px;
+.new-task-btn:hover {
   background-color: var(--med-blue);
-  border-radius: 25px;
+}
+
+/* Task Card */
+.task {
+  width: 100%;
+  background-color: var(--med-blue);
+  border-radius: 5px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem;
-}
-
-.complete-btn {
-  background: none;
+  padding: 10px;
+  color: var(--white);
   border: none;
 }
 
-.task-subject {
-  color: var(--white);
-  font-size: 1.2rem;
+.task-left>span{
+  padding-left: 15px;
+  cursor: default;
 }
 
-.due {
-  color: var(--white);
-  font-size: .8rem;
-}
-
-.task-icon {
-  width: 25px;
-  text-align: center;
-  background: none;
-  border: none;
-  color:rgb(156, 156, 156);
-}
-
-.task-icon:hover {
-  scale: 1.2;
+.task-left>svg:hover {
   cursor: pointer;
-}
-
-.task-list {
-  display: flex;
-  flex-flow: column;
-  gap: 1rem;
-}
-
-.complete {
-  text-decoration: line-through;
-  background-color: #2d3137;
-  color:rgb(101, 101, 101);
 }
 
 /* MODAL */
 
-.new-proj-modal {
+.modal {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -244,7 +198,7 @@ li > button {
   border: 2px solid #2f3846;
 }
 
-.new-proj-modal.active {
+.modal.active {
   transform: translate(-50%, -50%) scale(1);
 }
 
@@ -262,8 +216,7 @@ li > button {
   width: 100%;
   display: none;
 }
-
-.new-project-input {
+.modal-input {
   width: 200px;
   height: 30px;
   border-radius: 5px;
@@ -273,14 +226,14 @@ li > button {
   border: 2px solid #49515d;
 }
 
-.new-project-submit {
+.modal-submit {
   padding: 15px 25px;
   background-color: var(--primary-blue);
   border: 2px solid var(--med-blue);
   border-radius: 10px;
 }
 
-.new-project-submit:hover {
+.modal-submit:hover {
   cursor: pointer;
 }
 
@@ -316,5 +269,6 @@ li > button {
   align-items: center;
   color: var(--med-blue);
   box-shadow: 0px -5px 7px 0px var(--lt-grey);
+  border-top: 1px solid #00acb515;
   z-index: 3;
 }
