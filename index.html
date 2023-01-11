@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
     <script type="module" src="../dist/main.js"></script>
+    <script src="https://kit.fontawesome.com/23bb90498d.js" crossorigin="anonymous"></script>
     <title>ToDo List</title>
   </head>
   <body>
@@ -15,48 +16,70 @@
       </div>
       <div class="sidebar">
         <div class="nav-title">
-          <p class="nav-item">Projects</p>
-          <button class="new-project-btn">+</button>
+          <p class="nav-section">Projects</p>
         </div>
         <div class="nav-projects">
-          <ul class="nav-menu-list"></ul>
+          <button class="nav-btn active">
+            <div class="nav-btn-left">
+              <i class="fa-solid fa-list-check"></i>
+              <span>Project 1</span>
+            </div>
+            <div class="nav-btn-right">
+              <i class="fa-solid fa-xmark"></i>
+            </div>
+          </button>
+          <button class="nav-btn">
+            <div class="nav-btn-left">
+              <i class="fa-solid fa-list-check"></i>
+              <span>Project 2</span>
+            </div>
+            <div class="nav-btn-right">
+            </div>
+          </button>
+          <button class="nav-btn new-project-btn">
+            <div class="nav-btn-left">
+              <i class="fa-solid fa-plus"></i>
+              <span>New Project</span>
+            </div>
+            <div class="nav-btn-right">
+            </div>
+          </button>
         </div>
       </div>
-      <div class="list">
-        <div class="todo-container">
-          <button class="new-task-btn">+</button>
-          <div class="task-list">
-            <!-- <div class="task">
-              <img
-                class="task-icon"
-                src="../src/circle-in-circle.svg"
-                alt="task-not-complete"
-              />
-              <p class="task-subject">Finish the wireframe</p>
-              <img class="task-icon" src="../src/trash.svg" alt="trash-can" />
+      <div class="task-section">
+        <div class="task-container">
+          <button class="new-task-btn">
+            <i class="fa-solid fa-circle-plus"></i>
+            <span>Add Task</span>
+          </button>
+            <button class="task">
+              <div class="task-left">
+                <i class="fa-regular fa-circle"></i>
+                <span>Do Laundry</span>
+                </div>
+              </button>
             </div>
-            <div class="task complete">
-            <img
-              class="task-icon"
-              src="../src/circle-check.svg"
-              alt="task-complete"
-            />
-            <p class="task-subject complete">pick color scheme</p>
-            <img class="task-icon" src="../src/trash.svg" alt="trash-can" />
-          </div>
-          </div> -->
-        </div>
+          </div> 
+      <div class="footer">Copyright 2022 nronzel
       </div>
     </div>
-    <div class="footer">Copyright 2022 nronzel</div>
+  </div>
     <div class="overlay"></div>
-    <div class="new-proj-modal">
+    <!-- <div id="project" class="modal">
       <div class="modal-header">
         <p class="large">New Project</p>
-        <button class="close">X</button>
+        <button class="close proj-close">X</button>
       </div>
-      <input class="new-project-input" type="text" placeholder="Project Name">
-      <button class="new-project-submit" type="submit">Add</button>
+      <input class="modal-input project-input" type="text" placeholder="Project Name">
+      <button class="modal-submit project-submit" type="submit">Add</button>
     </div>
+    <div id="task" class="modal">
+      <div class="modal-header">
+        <p class="large">New Task</p>
+        <button class="close task-close">X</button>
+      </div>
+      <input class="modal-input task-input" type="text" placeholder="Do the laundry...">
+      <button class="modal-submit" type="submit">Add</button>
+    </div> -->
   </body>
 </html>
