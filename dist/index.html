@@ -14,63 +14,70 @@
   </head>
   <body>
     <div class="main-container">
+      <!-- HEADER -->
       <div class="header">
         <i class="fa-solid fa-list"></i>
         <p class="title">Todo List</p>
       </div>
+      <!-- SIDEBAR -->
       <div class="sidebar">
         <div class="nav-title">
           <p class="nav-section">Upcoming</p>
         </div>
+        <!-- DEFAULT PROJECTS -->
         <div class="default-projects">
-          <button class="nav-btn">
+          <button id="defaultProj" class="nav-btn">
             <div class="nav-btn-left">
               <i class="fa-regular fa-clock"></i>
-              Today
+              <span>Today</span>
             </div>
           </button>
-          <button class="nav-btn">
+          <button id="defaultProj" class="nav-btn">
             <div class="nav-btn-left">
               <i class="fa-solid fa-calendar-day"></i>
-              Tomorrow
+              <span>Tomorrow</span>
             </div>
           </button>
         </div>
+        <!-- PROJECT SECTION -->
         <div class="nav-title">
           <p class="nav-section">Projects</p>
         </div>
-        <div class="nav-projects">
-          <button class="nav-btn active">
+        <div id="projectList" class="nav-projects">
+          <button id="projectBtn" class="nav-btn active">
             <div class="nav-btn-left">
               <i class="fa-solid fa-list-check"></i>
-              Project 1
+              <span>Project 1</span>
             </div>
             <div class="nav-btn-right">
               <i class="fa-solid fa-xmark"></i>
             </div>
           </button>
-          <button class="nav-btn">
+          <button id="projectBtn" class="nav-btn">
             <div class="nav-btn-left">
               <i class="fa-solid fa-list-check"></i>
-              Project 2
+              <span>Project 2</span>
             </div>
             <div class="nav-btn-right">
               <i class="fa-solid fa-xmark"></i>
             </div>
           </button>
-          <button class="nav-btn new-project-btn">
+          <!-- NEW PROJECT BUTTON -->
+          <button id="newProjBtn" class="nav-btn new-project-btn">
             <i class="fa-solid fa-plus blue-svg"></i>
             New Project
           </button>
-          <div class="add-proj-popup">
+          <!-- NEW PROJECT POPUP -->
+          <div id="newProjPopup" class="add-proj-popup">
             <div class="proj-popup-left">
               <input class="new-proj-input" type="text" placeholder="Project Name">
             </div>
             <button class="add-btn-popup"><i class="fa-solid fa-check"></i></button>
-            <button class="close-popup"><i class="fa-solid fa-xmark"></i></button>
+            <button id="closeProjPopupBtn" class="close-popup"><i class="fa-solid fa-xmark"></i></button>
           </div>
         </div>
       </div>
+      <!-- TASK AREA -->
       <div class="task-section">
         <div class="task-container">
           <p class="project-title">Project 1</p>
@@ -94,16 +101,22 @@
               <i class="fa-solid fa-xmark remove-task-svg"></i>
             </div>
           </button>
-          <div>
-            <button class="new-task-btn">
+          <div class="add-task-container">
+            <!-- NEW TASK BUTTON -->
+            <button id="newTaskBtn" class="new-task-btn">
               <i class="fa-solid fa-circle-plus blue-svg"></i>
               <span>Add Task</span>
             </button>
           </div>
-          <div class="add-task-popup">
+          <!-- ADD TASK POPUP -->
+          <div id="newTaskPopup" class="add-task-popup">
             <input class="new-task-input" type="text" placeholder="Enter task name...">
-            <button class="add-btn-popup"><i class="fa-solid fa-check"></i></button>
-            <button class="close-popup"><i class="fa-solid fa-xmark"></i></button>
+            <button class="add-btn-popup">
+              <i class="fa-solid fa-check"></i>
+            </button>
+            <button id="closeTaskPopup" class="close-popup">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
           </div>
         </div>
       </div>
