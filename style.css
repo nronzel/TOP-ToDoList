@@ -129,7 +129,7 @@ svg:hover {
   visibility: visible;
 }
 
-.active {
+.nav-btn.active {
   background-color: var(--dark-blue);
   box-shadow: 3px 3px 2px 0px rgba(0, 0, 0, 0.243) inset;
 }
@@ -141,13 +141,18 @@ svg:hover {
   width: 100%;
   justify-content: center;
   gap: 1rem;
-  /* visibility: hidden; */
+  visibility: hidden;
 }
 
 .add-task-popup {
   display: flex;
   justify-content: space-between;
   width: 100%;
+  visibility: hidden;
+}
+
+.add-task-popup.active,
+.add-proj-popup.active {
   visibility: visible;
 }
 
@@ -219,6 +224,10 @@ svg:hover {
   font-size: 2rem;
   align-self: flex-start;
   margin-bottom: 10px;
+}
+
+.add-task-container {
+  width: 100%;
 }
 
 .new-task-btn{
@@ -298,7 +307,12 @@ svg:hover {
   margin-left: 10px;
 }
 
-.github-logo > svg {
+.fa-github {
   font-size: 20px;
   color: var(--primary-blue);
+  transition: transform 0.3s ease-in-out;
+}
+
+.fa-github:hover {
+  transform: rotate(360deg) scale(1.2);
 }
