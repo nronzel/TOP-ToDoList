@@ -144,6 +144,23 @@ svg:hover {
   /* visibility: hidden; */
 }
 
+.add-task-popup {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  visibility: visible;
+}
+
+.new-task-input {
+  width: 85%;
+  padding: 8px;
+  background-color: var(--white);
+  border-radius: 5px;
+  border: none;
+  color: var(--dark-blue);
+  gap: 1rem;
+}
+
 .add-btn-popup,
 .close-popup {
   background: none;
@@ -152,7 +169,7 @@ svg:hover {
 
 .add-btn-popup > svg,
 .close-popup > svg {
-  font-size: 1.2rem;
+  font-size: 1.4rem;
 }
 
 .add-btn-popup> svg {
@@ -258,21 +275,7 @@ svg:hover {
   color: var(--med-grey);
 }
 
-.add-task-popup {
-  display: flex;
-  justify-content: space-evenly;
-  width: 95%;
-  visibility: visible;
-}
 
-.new-task-input {
-  width: 85%;
-  padding: 5px;
-  background-color: var(--white);
-  border-radius: 5px;
-  border: none;
-  color: var(--dark-blue);
-}
 
 /* Footer Content */
 .footer {
