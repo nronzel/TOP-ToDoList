@@ -197,6 +197,13 @@ svg:hover {
   gap: 5px;
 }
 
+.project-title {
+  color: var(--white);
+  font-size: 2rem;
+  align-self: flex-start;
+  margin-bottom: 10px;
+}
+
 .new-task-btn{
   background: none;
   border: none;
