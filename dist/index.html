@@ -15,9 +15,27 @@
   <body>
     <div class="main-container">
       <div class="header">
+        <i class="fa-solid fa-list"></i>
         <p class="title">Todo List</p>
       </div>
       <div class="sidebar">
+        <div class="nav-title">
+          <p class="nav-section">Upcoming</p>
+        </div>
+        <div class="default-projects">
+          <button class="nav-btn">
+            <div class="nav-btn-left">
+              <i class="fa-regular fa-clock"></i>
+              Today
+            </div>
+          </button>
+          <button class="nav-btn">
+            <div class="nav-btn-left">
+              <i class="fa-solid fa-calendar-day"></i>
+              Tomorrow
+            </div>
+          </button>
+        </div>
         <div class="nav-title">
           <p class="nav-section">Projects</p>
         </div>
@@ -44,14 +62,18 @@
             <i class="fa-solid fa-plus blue-svg"></i>
             New Project
           </button>
+          <div class="add-proj-popup">
+            <div class="proj-popup-left">
+              <input class="new-proj-input" type="text" placeholder="Project Name">
+            </div>
+            <button class="add-btn-popup"><i class="fa-solid fa-check"></i></button>
+            <button class="close-popup"><i class="fa-solid fa-xmark"></i></button>
+          </div>
         </div>
       </div>
       <div class="task-section">
         <div class="task-container">
-          <button class="new-task-btn">
-            <i class="fa-solid fa-circle-plus blue-svg"></i>
-            <span>Add Task</span>
-          </button>
+          
           <button class="task">
             <div class="task-left">
               <i class="fa-regular fa-circle blue-svg"></i>
@@ -72,11 +94,22 @@
               <i class="fa-solid fa-xmark remove-task-svg"></i>
             </div>
           </button>
+          <div>
+            <button class="new-task-btn">
+              <i class="fa-solid fa-circle-plus blue-svg"></i>
+              <span>Add Task</span>
+            </button>
+          </div>
+          <div class="add-task-popup">
+            <input class="new-task-input" type="text" placeholder="Enter task name...">
+            <button class="add-btn-popup"><i class="fa-solid fa-check"></i></button>
+            <button class="close-popup"><i class="fa-solid fa-xmark"></i></button>
+          </div>
         </div>
       </div>
       <div class="footer">
         <p class="footer-text">Copyright © 2023 nronzel</p>
-        <a class="github-logo" href="https://github.com/nronzel">
+        <a class="github-logo" href="https://github.com/nronzel" target="_blank">
           <i class="fa-brands fa-github"></i>
         </a>
       </div>
