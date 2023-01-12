@@ -16,32 +16,13 @@ export default class Interface {
     // load projects from Storage and create the list
     // for each project draw it in the projects section
     // call a drawProject() function
-    const projectsList = new List();
     Interface.addDefaultEventListeners()
   }
 
   static initAddBtns() {
 
   }
-  
-  static drawProject(title) {
-    const projects = document.getElementById("projectList")
-    projects.innerHTML += `
-    <button id="projectBtn" class="nav-btn">
-            <div class="nav-btn-left">
-              <i class="fa-solid fa-list-check"></i>
-              <span>${title}</span>
-            </div>
-            <div class="nav-btn-right">
-              <i class="fa-solid fa-xmark"></i>
-            </div>
-          </button>
-    `
-  }
 
-  static drawTask(title) {
-
-  }
 
   static addDefaultEventListeners() {
     const newProjectBtn = document.getElementById("newProjBtn")
@@ -69,6 +50,25 @@ export default class Interface {
     closePopupBtns.forEach((btn) => btn.addEventListener('click', Interface.closeAllPopups))
   }
 
+  // DRAW CONTENT
+  static drawProject(title) {
+    const projects = document.getElementById("projectList")
+    projects.innerHTML += `
+    <button id="projectBtn" class="nav-btn">
+            <div class="nav-btn-left">
+              <i class="fa-solid fa-list-check"></i>
+              <span>${title}</span>
+            </div>
+            <div class="nav-btn-right">
+              <i class="fa-solid fa-xmark"></i>
+            </div>
+          </button>
+    `
+  }
+
+  static drawTask(title) {
+
+  }
 
 
   // PROJECT BUTTON ACTIONS
@@ -102,12 +102,17 @@ export default class Interface {
 
   static activateProjectPopup() {
     const newProjPopup = document.getElementById("newProjPopup")
+    const newProjBtn = document.getElementById("newProjBtn")
     newProjPopup.classList.add("active");
+    newProjBtn.style.display = "none"
   }
 
   static closeProjectPopup() {
     const newProjPopup = document.getElementById("newProjPopup")
+    const newProjBtn = document.getElementById("newProjBtn")
     newProjPopup.classList.remove("active")
+    newProjBtn.style.display = "flex"
+    
   }
 
   static clearNewProjInput() {
@@ -120,7 +125,6 @@ export default class Interface {
     e.target.parentNode.classList.contains("fa-xmark")) {
       Interface.closeProjectPopup()
     }
-
     if (e.target.classList.contains("fa-check") ||
     e.target.parentNode.classList.contains("fa-check")) {
       const input = document.querySelector(".new-proj-input")
@@ -137,12 +141,16 @@ export default class Interface {
   // TASK POPUP
   static activateTaskPopup() {
     const newTaskPopup = document.getElementById("newTaskPopup")
+    const newTaskBtn = document.getElementById("newTaskBtn")
     newTaskPopup.classList.add("active");
+    newTaskBtn.style.display = "none"
   }
 
   static closeTaskPopup() {
     const newTaskPopup = document.getElementById("newTaskPopup")
+    const newTaskBtn = document.getElementById("newTaskBtn")
     newTaskPopup.classList.remove("active")
+    newTaskBtn.style.display = "flex"
   }
 
   static closeAllPopups() {

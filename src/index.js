@@ -1,4 +1,5 @@
-import Interface from "./modules/interface.js";
+import Interface from "./modules/interface";
+import List from "./modules/list";
 
-
+const projectList = new List()
 Interface.loadHome();

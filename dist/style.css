@@ -135,6 +135,10 @@ svg:hover {
   box-shadow: 3px 3px 2px 0px rgba(0, 0, 0, 0.243) inset;
 }
 
+#newProjPopup {
+  margin: 5px 0px;
+}
+
 /* Add Project Popup */
 
 .new-proj-section {
