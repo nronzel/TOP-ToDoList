@@ -1,11 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito&display=swap");
 
 *,
-*:before,
-*:after {
+*::before,
+*::after {
   padding: 0;
   margin: 0;
   font-size: 16px;
+  box-sizing: border-box;
 }
 
 :root {
@@ -14,6 +15,7 @@
   --white: #eeeeee;
   --primary-blue: #00adb5;
   --lt-grey: rgba(0, 0, 0, 0.329);
+  --med-grey: #ababab;
   --lt-blue-border: 2px solid #00acb512;
 }
 
@@ -47,7 +49,7 @@ svg:hover {
   justify-content: center;
   align-items: center;
   box-shadow: 5px 5px 7px 0px var(--lt-grey);
-  border-bottom: 1px solid #00acb515;
+  border-bottom: var(--lt-blue-border);
   z-index: 2;
 }
 
@@ -55,6 +57,12 @@ svg:hover {
   font-size: 5rem;
   color: var(--white);
   font-weight: 700;
+}
+
+.fa-list {
+  font-size: 3rem;
+  margin-right: 20px;
+  color: var(--primary-blue);
 }
 
 /* Sidebar Content */
@@ -75,11 +83,8 @@ svg:hover {
   font-size: 1.5rem;
 }
 
-.nav-item {
-  font-size: 2rem;
-}
-
-.nav-projects {
+.nav-projects,
+.default-projects {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -127,6 +132,43 @@ svg:hover {
 .active {
   background-color: var(--dark-blue);
   box-shadow: 3px 3px 2px 0px rgba(0, 0, 0, 0.243) inset;
+}
+
+/* Add Project Popup */
+
+.add-proj-popup {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  gap: 1rem;
+  /* visibility: hidden; */
+}
+
+.add-btn-popup,
+.close-popup {
+  background: none;
+  border: none;
+}
+
+.add-btn-popup > svg,
+.close-popup > svg {
+  font-size: 1.2rem;
+}
+
+.add-btn-popup> svg {
+  color: rgb(34, 187, 34);
+}
+
+.close-popup > svg {
+  color: rgb(239, 86, 86);
+}
+
+.new-proj-input {
+  padding: 8px;
+  border-radius: 5px;
+  background-color: var(--white);
+  color: var(--dark-blue);
+  border: none;
 }
 
 /* Main Section */
@@ -179,7 +221,6 @@ svg:hover {
   font-size: 1rem;
 }
 
-
 /* Task Card */
 .task {
   width: 100%;
@@ -198,30 +239,33 @@ svg:hover {
   background-color: var(--med-blue);
 }
 
-.task-left {
-  display: flex;
-  gap: 25px;
-  align-items: center;
-}
-
+.task-left,
 .task-right {
   display: flex;
   align-items: center;
   gap: 35px;
 }
 
-.remove-task-svg {
-  visibility: hidden;
+.due-date {
+  font-size: .7rem;
+  color: var(--med-grey);
 }
 
-.task:hover .remove-task-svg{
+.add-task-popup {
+  display: flex;
+  justify-content: space-evenly;
+  width: 95%;
   visibility: visible;
 }
 
-.due-date {
-  font-size: .7rem;
+.new-task-input {
+  width: 85%;
+  padding: 5px;
+  background-color: var(--white);
+  border-radius: 5px;
+  border: none;
+  color: var(--dark-blue);
 }
-
 
 /* Footer Content */
 .footer {
@@ -239,8 +283,6 @@ svg:hover {
 .footer-text {
   color: var(--white);
 }
-
-
 
 .github-logo {
   margin-left: 10px;
