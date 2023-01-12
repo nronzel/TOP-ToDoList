@@ -27,7 +27,7 @@ export default class Interface {
   static drawProject(title) {
     const projects = document.getElementById("projectList")
     projects.innerHTML += `
-    <button class="nav-btn active">
+    <button id="projectBtn" class="nav-btn">
             <div class="nav-btn-left">
               <i class="fa-solid fa-list-check"></i>
               <span>${title}</span>
@@ -48,13 +48,25 @@ export default class Interface {
     const newTaskBtn = document.getElementById("newTaskBtn")
     const projectBtns = document.querySelectorAll("#projectBtn")
     const defaultProjs = document.querySelectorAll("#defaultProj")
-    const closeBtns = document.querySelectorAll(".close-btn")
+    const closePopupBtns = document.querySelectorAll(".close-popup")
+    const newProjPopup = document.getElementById("newProjPopup")
+    const newTaskPopup = document.getElementById("newTaskPopup")
 
     newProjectBtn.addEventListener('click', Interface.activateProjectPopup)
     newTaskBtn.addEventListener('click', Interface.activateTaskPopup)
-    defaultProjs.forEach((proj) => proj.addEventListener('click', Interface.defulatProjActions))
+    newProjPopup.addEventListener('click', Interface.handleProjPopup)
+    newTaskPopup.addEventListener('click', Interface.handleTaskPopup)
+    defaultProjs.forEach((proj) => proj.addEventListener('click', Interface.defaultProjActions))
     projectBtns.forEach((btn) => btn.addEventListener('click', Interface.projBtnActions))
-    closeBtns.forEach((btn) => btn.addEventListener('click', Interface.closeAllPopups))
+    closePopupBtns.forEach((btn) => btn.addEventListener('click', Interface.closeAllPopups))
+  }
+
+  static initProjectBtns() {
+    const projectBtns = document.querySelectorAll("#projectBtn")
+    const closePopupBtns = document.querySelectorAll(".close-popup")
+
+    projectBtns.forEach((btn) => btn.addEventListener('click', Interface.projBtnActions))
+    closePopupBtns.forEach((btn) => btn.addEventListener('click', Interface.closeAllPopups))
   }
 
 
@@ -62,7 +74,6 @@ export default class Interface {
   // PROJECT BUTTON ACTIONS
   static projBtnActions(e) {
     const title = this.children[0].children[1].textContent;
-    console.log(this)
 
     if (e.target.classList.contains("fa-xmark") || 
     e.target.parentNode.classList.contains("fa-xmark")) {
@@ -75,8 +86,10 @@ export default class Interface {
     this.classList.add("active")
   }
 
-  static defulatProjActions(e) {
-    console.log(this.innerText.trim());
+  static defaultProjActions(e) {
+    const title = this.innerText.trim();
+    Interface.clearAllActive()
+    this.classList.add("active")
   }
 
   static clearAllActive() {
@@ -86,10 +99,10 @@ export default class Interface {
 
   // POPUPS
   // PROJECT POPUP
+
   static activateProjectPopup() {
     const newProjPopup = document.getElementById("newProjPopup")
     newProjPopup.classList.add("active");
-    Interface.handleProjPopup()
   }
 
   static closeProjectPopup() {
@@ -97,8 +110,28 @@ export default class Interface {
     newProjPopup.classList.remove("active")
   }
 
+  static clearNewProjInput() {
+    const input = document.querySelector(".new-proj-input")
+    input.value = ""
+  }
+
   static handleProjPopup(e) {
-    console.log(e)
+    if (e.target.classList.contains("fa-xmark") ||
+    e.target.parentNode.classList.contains("fa-xmark")) {
+      Interface.closeProjectPopup()
+    }
+
+    if (e.target.classList.contains("fa-check") ||
+    e.target.parentNode.classList.contains("fa-check")) {
+      const input = document.querySelector(".new-proj-input")
+      if (input.value == "") {
+        alert("Project name cannot be blank!")
+      }
+      Interface.drawProject(input.value)
+      Interface.closeProjectPopup()
+      Interface.initProjectBtns()
+    }
+    Interface.clearNewProjInput()
   }
 
   // TASK POPUP
@@ -117,6 +150,26 @@ export default class Interface {
     Interface.closeTaskPopup()
   }
 
+  static handleTaskPopup(e) {
+    if (e.target.classList.contains("fa-xmark") ||
+    e.target.parentNode.classList.contains("fa-xmark")) {
+      Interface.closeTaskPopup()
+    }
+    if (e.target.classList.contains("fa-check") ||
+    e.target.parentNode.classList.contains("fa-check")) {
+      const input = document.querySelector(".new-task-input")
+      if (input.value == "") {
+        alert("Task name cannot be blank!")
+      }
+      console.log(input.value)
+      Interface.closeTaskPopup()
+    }
+    Interface.clearNewTaskInput()
+  }
 
+  static clearNewTaskInput() {
+    const input = document.querySelector(".new-task-input")
+    input.value = ""
+  }
 
 }

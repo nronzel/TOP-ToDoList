@@ -25,8 +25,10 @@ export default class List {
   }
 
   addProject(newProject) {
-    if (this.projects.find((project) => project.name === newProject.name))
-      return
+    if (this.projects.find((project) => project.name === newProject.name)){
+      alert("Project already exists")
+        return
+    }
     this.projects.push(newProject);
     }
 
