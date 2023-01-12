@@ -117,6 +117,7 @@ svg:hover {
   display: flex;
   justify-content: flex-start;
   gap: 10px;
+  margin: 5px 0px;
 }
 
 .nav-btn-right,
@@ -135,6 +136,12 @@ svg:hover {
 }
 
 /* Add Project Popup */
+
+.new-proj-section {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
 
 .add-proj-popup {
   display: flex;
@@ -192,6 +199,9 @@ svg:hover {
   color: var(--dark-blue);
   border: none;
 }
+
+
+
 
 /* Main Section */
 .task-section {
