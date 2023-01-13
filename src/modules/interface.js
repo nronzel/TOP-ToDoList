@@ -1,6 +1,7 @@
 import Project from "./project";
 import Task from "./task";
 import List from "./list";
+import Storage from "./storage";
 
 export default class Interface {
 
@@ -16,38 +17,48 @@ export default class Interface {
     // load projects from Storage and create the list
     // for each project draw it in the projects section
     // call a drawProject() function
-    Interface.addDefaultEventListeners()
+    Storage.getList().getProjects().forEach((project) => {
+      if(project.title !== 'Today'){
+        Interface.drawProject(project.title)
+      }
+    })
+    Interface.initAll()
   }
 
-  static initAddBtns() {
-
+  // EVENT LISTENERS
+  static initAll() {
+    Interface.initProjectBtnActions()
+    Interface.initTaskBtnActions()
+    Interface.initDefaultProjectActions()
   }
 
+  static initClosePopupBtnActions() {
+    const closePopupBtns = document.querySelectorAll(".close-popup")
+    closePopupBtns.forEach((btn) => btn.addEventListener('click', Interface.closeAllPopups))
+  }
 
-  static addDefaultEventListeners() {
-    const newProjectBtn = document.getElementById("newProjBtn")
-    const newTaskBtn = document.getElementById("newTaskBtn")
-    const projectBtns = document.querySelectorAll("#projectBtn")
+  static initDefaultProjectActions() {
     const defaultProjs = document.querySelectorAll("#defaultProj")
-    const closePopupBtns = document.querySelectorAll(".close-popup")
-    const newProjPopup = document.getElementById("newProjPopup")
-    const newTaskPopup = document.getElementById("newTaskPopup")
-
-    newProjectBtn.addEventListener('click', Interface.activateProjectPopup)
-    newTaskBtn.addEventListener('click', Interface.activateTaskPopup)
-    newProjPopup.addEventListener('click', Interface.handleProjPopup)
-    newTaskPopup.addEventListener('click', Interface.handleTaskPopup)
     defaultProjs.forEach((proj) => proj.addEventListener('click', Interface.defaultProjActions))
-    projectBtns.forEach((btn) => btn.addEventListener('click', Interface.projBtnActions))
-    closePopupBtns.forEach((btn) => btn.addEventListener('click', Interface.closeAllPopups))
+    Interface.initClosePopupBtnActions()
   }
 
-  static initProjectBtns() {
-    const projectBtns = document.querySelectorAll("#projectBtn")
-    const closePopupBtns = document.querySelectorAll(".close-popup")
+  static initTaskBtnActions() {
+    const newTaskBtn = document.getElementById("newTaskBtn")
+    const newTaskPopup = document.getElementById("newTaskPopup")
+    newTaskBtn.addEventListener('click', Interface.activateTaskPopup)
+    newTaskPopup.addEventListener('click', Interface.handleTaskPopup)
+    Interface.initClosePopupBtnActions()
+  }
 
+  static initProjectBtnActions() {
+    const projectBtns = document.querySelectorAll("#projectBtn")
+    const newProjPopup = document.getElementById("newProjPopup")
+    const newProjBtn = document.getElementById("newProjBtn")
+    newProjBtn.addEventListener('click', Interface.activateProjectPopup)
     projectBtns.forEach((btn) => btn.addEventListener('click', Interface.projBtnActions))
-    closePopupBtns.forEach((btn) => btn.addEventListener('click', Interface.closeAllPopups))
+    newProjPopup.addEventListener('click', Interface.handleProjPopup)
+    Interface.initClosePopupBtnActions()
   }
 
   // DRAW CONTENT
@@ -66,8 +77,46 @@ export default class Interface {
     `
   }
 
-  static drawTask(title) {
+  static drawTask(title, dueDate="No Due Date") {
+    const tasks = document.querySelector(".task-container")
+    tasks.innerHTML += `
+    <button class="task">
+            <div class="task-left">
+              <i class="fa-regular fa-circle blue-svg"></i>
+              <p class="task-subject">${title}</p>
+            </div>
+            <div class="task-right">
+              <p class="due-date">${dueDate}</p>
+              <i class="fa-solid fa-xmark remove-task-svg"></i>
+            </div>
+          </button>
+    `
+  }
 
+  static drawTaskContainer(projTitle) {
+    const taskSection = document.querySelector(".task-section")
+    taskSection.innerHTML += `
+    <h1 class="project-title">${projTitle}</h1>
+    <div class="task-container"></div>
+    `
+
+    taskSection.innerHTML += `
+    <!-- NEW TASK BUTTON -->
+    <button id="newTaskBtn" class="new-task-btn">
+      <i class="fa-solid fa-circle-plus blue-svg"></i>
+      <span>Add Task</span>
+    </button>
+    <!-- ADD TASK POPUP -->
+    <div id="newTaskPopup" class="add-task-popup">
+      <input class="new-task-input" type="text" placeholder="Enter task name...">
+      <button class="add-btn-popup">
+        <i class="fa-solid fa-check"></i>
+      </button>
+      <button id="closeTaskPopup" class="close-popup">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+    `
   }
 
 
@@ -99,7 +148,6 @@ export default class Interface {
 
   // POPUPS
   // PROJECT POPUP
-
   static activateProjectPopup() {
     const newProjPopup = document.getElementById("newProjPopup")
     const newProjBtn = document.getElementById("newProjBtn")
@@ -112,7 +160,6 @@ export default class Interface {
     const newProjBtn = document.getElementById("newProjBtn")
     newProjPopup.classList.remove("active")
     newProjBtn.style.display = "flex"
-    
   }
 
   static clearNewProjInput() {
@@ -133,7 +180,7 @@ export default class Interface {
       }
       Interface.drawProject(input.value)
       Interface.closeProjectPopup()
-      Interface.initProjectBtns()
+      Interface.initProjectBtnActions()
     }
     Interface.clearNewProjInput()
   }
@@ -170,7 +217,9 @@ export default class Interface {
         alert("Task name cannot be blank!")
       }
       console.log(input.value)
+      Interface.drawTask(input.value)
       Interface.closeTaskPopup()
+      Interface.initTaskBtnActions()
     }
     Interface.clearNewTaskInput()
   }
