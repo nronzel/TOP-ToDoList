@@ -135,10 +135,6 @@ svg:hover {
   box-shadow: 3px 3px 2px 0px rgba(0, 0, 0, 0.243) inset;
 }
 
-#newProjPopup {
-  margin: 5px 0px;
-}
-
 /* Add Project Popup */
 
 .new-proj-section {
@@ -149,7 +145,8 @@ svg:hover {
 
 .add-proj-popup {
   display: flex;
-  width: 100%;
+  margin: 5px 8px;
+  width: 240px;
   justify-content: center;
   gap: 1rem;
   visibility: hidden;
@@ -158,7 +155,7 @@ svg:hover {
 .add-task-popup {
   display: flex;
   justify-content: space-between;
-  width: 100%;
+  width: 736px;
   visibility: hidden;
 }
 
@@ -202,6 +199,7 @@ svg:hover {
   background-color: var(--white);
   color: var(--dark-blue);
   border: none;
+  width: 150px;
 }
 
 
@@ -228,20 +226,15 @@ svg:hover {
   align-items: center;
   border-radius: 15px;
   flex-shrink: 1;
-  padding: 2rem;
-  margin-top: 30px;
+  padding: 2rem 2rem 5px 2rem;
   gap: 5px;
 }
 
 .project-title {
   color: var(--white);
   font-size: 2rem;
-  align-self: flex-start;
-  margin-bottom: 10px;
-}
-
-.add-task-container {
-  width: 100%;
+  margin-top: 50px;
+  width: 800px;
 }
 
 .new-task-btn{
@@ -253,7 +246,7 @@ svg:hover {
   gap: 10px;
   align-items: center;
   justify-content: center;
-  width: 100%;
+  width: 736px;
   padding: 10px;
   border-radius: 5px;
 }
