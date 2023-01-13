@@ -37,9 +37,12 @@ export default class Project {
     this.tasks = this.tasks.filter((task) => task.name !== taskName)
   }
 
-  // getTasksToday() {
-
-  // }
+  getTasksToday() {
+    return this.tasks.filter((task) => {
+      const date = new Date(task.getDate())
+      return isToday(toDate(date))
+    })
+  }
 
   // getTasksTomorrorw() {
 
