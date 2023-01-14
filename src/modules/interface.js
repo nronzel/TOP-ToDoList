@@ -28,8 +28,10 @@ export default class Interface {
       .getTasks()
       .forEach((task) => Interface.drawTask(task.title, task.dueDate));
 
-    Interface.initTaskBtnActions();
-    Interface.initTaskPopupBtnActions();
+    if (projTitle !== "Today") {
+      Interface.initTaskBtnActions();
+      Interface.initTaskPopupBtnActions();
+    }
   }
 
   // EVENT LISTENERS
