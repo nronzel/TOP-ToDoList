@@ -125,25 +125,30 @@ export default class Interface {
 
   static loadProjectData(projTitle) {
     const taskSection = document.querySelector(".task-section");
+
     taskSection.innerHTML = `
     <h1 id="projTitle" class="project-title">${projTitle}</h1>
-    <div class="task-container"></div>
-    <!-- NEW TASK BUTTON -->
-    <button id="newTaskBtn" class="new-task-btn">
-      <i class="fa-solid fa-circle-plus blue-svg"></i>
-      <span>Add Task</span>
-    </button>
-    <!-- ADD TASK POPUP -->
-    <div id="newTaskPopup" class="add-task-popup">
-      <input class="new-task-input" type="text" placeholder="Enter task name...">
-      <button class="add-btn-popup">
-        <i class="fa-solid fa-check"></i>
+    <div class="task-container"></div>`
+
+    if (projTitle !== "Today") {
+      taskSection.innerHTML += `
+      <!-- NEW TASK BUTTON -->
+      <button id="newTaskBtn" class="new-task-btn">
+        <i class="fa-solid fa-circle-plus blue-svg"></i>
+        <span>Add Task</span>
       </button>
-      <button id="closeTaskPopup" class="close-popup">
-        <i class="fa-solid fa-xmark"></i>
-      </button>
-    </div>
-    `;
+      <!-- ADD TASK POPUP -->
+      <div id="newTaskPopup" class="add-task-popup">
+        <input class="new-task-input" type="text" placeholder="Enter task name...">
+        <button class="add-btn-popup">
+          <i class="fa-solid fa-check"></i>
+        </button>
+        <button id="closeTaskPopup" class="close-popup">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      `
+    }
     Interface.initTasks(projTitle);
   }
 
@@ -218,8 +223,7 @@ export default class Interface {
       e.target.classList.contains("fa-circle") ||
       e.target.parentNode.classList.contains("fa-circle")
     ) {
-      console.log("completed task");
-      // Interface.completeTask()
+      Interface.completeTask(this)
       return;
     }
     if (e.target.classList.contains("due-date")) {
@@ -371,6 +375,19 @@ export default class Interface {
     Interface.initTasks(projTitle);
   }
 
+  static completeTask(taskBtn) {
+    const projTitle = document.getElementById("projTitle").textContent
+    const taskTitle = taskBtn.children[0].children[1].textContent
+
+    if (projTitle === "Today") {
+      Storage.updateToday()
+    } else {
+      Storage.deleteTask(projTitle, taskTitle)
+    }
+    Interface.clearTasks()
+    Interface.initTasks(projTitle)
+  }
+
   static updateToday() {
     const list = Storage.getList();
     list.updateToday();
@@ -402,12 +419,10 @@ export default class Interface {
     const dueDateInput = task.children[1].children[1];
     dueDate.classList.add("active");
     dueDateInput.classList.add("active");
-    console.log("opening");
   }
 
   static closeDateInput(task) {
     const dueDate = task.children[1].children[0];
     console.log(dueDate);
-    console.log("closing");
   }
 }
