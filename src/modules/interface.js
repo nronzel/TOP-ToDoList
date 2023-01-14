@@ -1,4 +1,4 @@
-import { format } from "date-fns";
+import { addDays, format } from "date-fns";
 import Project from "./project.js";
 import Task from "./task.js";
 import Storage from "./storage.js";
@@ -115,7 +115,7 @@ export default class Interface {
             </div>
             <div class="task-right">
               <p class="due-date">${dueDate}</p>
-              <input type="date" class="input-due-date">
+              <input type="date" class="input-due-date" autofocus="autofocus">
               <i class="fa-solid fa-xmark remove-task-svg"></i>
             </div>
           </button>`;
@@ -139,7 +139,7 @@ export default class Interface {
       </button>
       <!-- ADD TASK POPUP -->
       <div id="newTaskPopup" class="add-task-popup">
-        <input class="new-task-input" type="text" placeholder="Enter task name...">
+        <input class="new-task-input" type="text" placeholder="Enter task name..." autofocus="autofocus">
         <button class="add-btn-popup">
           <i class="fa-solid fa-check"></i>
         </button>
@@ -353,7 +353,6 @@ export default class Interface {
     const input = document.querySelector(".new-task-input");
     const taskTitle = input.value;
     if (taskTitle === "") {
-      alert("Task title cannot be empty.");
       return;
     }
     if (Storage.getList().getProject(projTitle).contains(taskTitle)) {
@@ -399,7 +398,7 @@ export default class Interface {
     const taskBtn = this.parentNode.parentNode;
     const projTitle = document.getElementById("projTitle").textContent;
     const taskTitle = taskBtn.children[0].children[1].textContent;
-    const newDueDate = format(new Date(this.value), "MM/dd/yyy");
+    const newDueDate = format(new Date(this.value), "MMM do");
 
     if (projTitle === "Today") {
       Storage.setDueDate(projTitle, taskTitle, newDueDate);
