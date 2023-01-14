@@ -148,15 +148,14 @@ svg:hover {
 .add-proj-popup {
   display: flex;
   margin: 5px 8px;
-  width: 240px;
+  width: 95%;
   justify-content: center;
   gap: 1rem;
   visibility: hidden;
 }
 
 .add-task-popup {
-  display: flex;
-  justify-content: space-between;
+  display: block;
   width: 736px;
   visibility: hidden;
   margin-top: 5px;
@@ -202,7 +201,7 @@ svg:hover {
   background-color: var(--white);
   color: var(--dark-blue);
   border: none;
-  width: 150px;
+  max-width: 225px;
 }
 
 /* Main Section */
@@ -303,6 +302,7 @@ svg:hover {
   border-radius: 5px;
   color: var(--white);
   font-size: .9rem;
+  padding: 1px;
 }
 
 .input-due-date.active {
