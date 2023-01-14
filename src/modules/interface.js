@@ -1,7 +1,7 @@
 import { format } from "date-fns";
-import Project from "./project";
-import Task from "./task";
-import Storage from "./storage";
+import Project from "./project.js";
+import Task from "./task.js";
+import Storage from "./storage.js";
 
 export default class Interface {
   static loadHome() {
