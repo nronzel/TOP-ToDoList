@@ -1,11 +1,10 @@
-import Project from './project.js'
-import Task from './task.js'
+import Project from "./project.js";
+import Task from "./task.js";
 
 export default class List {
   constructor() {
     this.projects = [];
-    this.projects.push(new Project('Today'));
-    this.projects.push(new Project('Tomorrow'));
+    this.projects.push(new Project("Today"));
   }
 
   setProjects(projects) {
@@ -21,27 +20,37 @@ export default class List {
   }
 
   contains(title) {
-    return this.projects.some((project) => project.getTitle() === title)
+    return this.projects.some((project) => project.getTitle() === title);
   }
 
   addProject(newProject) {
-    if (this.projects.find((project) => project.name === newProject.name)){
-      alert("Project already exists")
-        return
+    if (this.projects.find((project) => project.title === newProject.title)) {
+      return;
     }
     this.projects.push(newProject);
-    }
+  }
 
   removeProject(title) {
-    const toDelete = this.projects.find((project) => project.getName() === title);
+    const toDelete = this.projects.find(
+      (project) => project.getTitle() === title
+    );
     this.projects.splice(this.projects.indexOf(toDelete), 1);
   }
 
-  // updateTodayProject() {
+  updateToday() {
+    this.getProject("Today").tasks = [];
 
-  // }
+    this.projects.forEach((project) => {
+      if (project.getTitle() === "Today") {
+        return;
+      }
 
-  // updateTomorrowProject() {
+      const todaysTasks = project.getTasksToday();
+      todaysTasks.forEach((task) => {
+        const taskTitle = `${task.getTitle()} (${project.getTitle()})`;
+        this.getProject("Today").addTask(new Task(taskTitle, task.getDate()));
+      });
+    });
+  }
 
-  // }
 }

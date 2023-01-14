@@ -1,3 +1,4 @@
+import { toDate, isToday } from "date-fns";
 export default class Project {
   constructor(title) {
     this.title = title;
@@ -21,30 +22,26 @@ export default class Project {
   }
 
   getTask(taskTitle) {
-    return this.tasks.find((task) => task.getTitle() === taskTitle)
+    return this.tasks.find((task) => task.getTitle() === taskTitle);
   }
 
   contains(taskTitle) {
-    return this.tasks.some((task) => task.getTitle() === taskTitle)
+    return this.tasks.some((task) => task.getTitle() === taskTitle);
   }
 
   addTask(newTask) {
-    if (this.tasks.find((task) => task.getTitle() === newTask.name)) return
-    this.tasks.push(newTask)
+    if (this.tasks.find((task) => task.getTitle() === newTask.title)) return;
+    this.tasks.push(newTask);
   }
 
-  removeTask(taskName) {
-    this.tasks = this.tasks.filter((task) => task.name !== taskName)
+  removeTask(taskTitle) {
+    this.tasks = this.tasks.filter((task) => task.title !== taskTitle);
   }
 
   getTasksToday() {
     return this.tasks.filter((task) => {
-      const date = new Date(task.getDate())
-      return isToday(toDate(date))
-    })
+      const date = new Date(task.getDate());
+      return isToday(toDate(date));
+    });
   }
-
-  // getTasksTomorrorw() {
-
-  // }
 }

@@ -1,69 +1,95 @@
+import { format } from "date-fns";
 import Project from "./project";
 import Task from "./task";
-import List from "./list";
 import Storage from "./storage";
 
 export default class Interface {
-
   static loadHome() {
-    Interface.initProjects()
-  }
-
-  static initUpcoming() {
-
+    Interface.initProjects();
+    Interface.initProjectBtnActions();
+    Interface.openProject("Today", document.querySelector(".today"));
+    Interface.initTaskBtnActions();
   }
 
   static initProjects() {
-    // load projects from Storage and create the list
-    // for each project draw it in the projects section
-    // call a drawProject() function
-    Storage.getList().getProjects().forEach((project) => {
-      if(project.title !== 'Today'){
-        Interface.drawProject(project.title)
-      }
-    })
-    Interface.initAll()
+    Storage.getList()
+      .getProjects()
+      .forEach((project) => {
+        if (project.title !== "Today") {
+          Interface.drawProject(project.title);
+        }
+      });
+    Interface.initProjectBtnActions();
+  }
+
+  static initTasks(projTitle) {
+    Storage.getList()
+      .getProject(projTitle)
+      .getTasks()
+      .forEach((task) => Interface.drawTask(task.title, task.dueDate));
+
+    Interface.initTaskBtnActions();
+    Interface.initTaskPopupBtnActions();
   }
 
   // EVENT LISTENERS
-  static initAll() {
-    Interface.initProjectBtnActions()
-    Interface.initTaskBtnActions()
-    Interface.initDefaultProjectActions()
+  static initAllActions() {
+    Interface.initProjectBtnActions();
+    Interface.initTaskBtnActions();
+    Interface.initTaskPopupBtnActions();
+    Interface.initDefaultProjectActions();
   }
 
   static initClosePopupBtnActions() {
-    const closePopupBtns = document.querySelectorAll(".close-popup")
-    closePopupBtns.forEach((btn) => btn.addEventListener('click', Interface.closeAllPopups))
+    const closePopupBtns = document.querySelectorAll(".close-popup");
+    closePopupBtns.forEach((btn) =>
+      btn.addEventListener("click", Interface.closeAllPopups)
+    );
   }
 
   static initDefaultProjectActions() {
-    const defaultProjs = document.querySelectorAll("#defaultProj")
-    defaultProjs.forEach((proj) => proj.addEventListener('click', Interface.defaultProjActions))
-    Interface.initClosePopupBtnActions()
+    const defaultProjs = document.querySelectorAll("#defaultProj");
+    defaultProjs.forEach((proj) =>
+      proj.addEventListener("click", Interface.defaultProjActions)
+    );
   }
 
-  static initTaskBtnActions() {
-    const newTaskBtn = document.getElementById("newTaskBtn")
-    const newTaskPopup = document.getElementById("newTaskPopup")
-    newTaskBtn.addEventListener('click', Interface.activateTaskPopup)
-    newTaskPopup.addEventListener('click', Interface.handleTaskPopup)
-    Interface.initClosePopupBtnActions()
+  static initTaskPopupBtnActions() {
+    const newTaskBtn = document.getElementById("newTaskBtn");
+    const newTaskPopup = document.getElementById("newTaskPopup");
+    newTaskBtn.addEventListener("click", Interface.activateTaskPopup);
+    newTaskPopup.addEventListener("click", Interface.handleTaskPopup);
+    Interface.initClosePopupBtnActions();
   }
 
   static initProjectBtnActions() {
-    const projectBtns = document.querySelectorAll("#projectBtn")
-    const newProjPopup = document.getElementById("newProjPopup")
-    const newProjBtn = document.getElementById("newProjBtn")
-    newProjBtn.addEventListener('click', Interface.activateProjectPopup)
-    projectBtns.forEach((btn) => btn.addEventListener('click', Interface.projBtnActions))
-    newProjPopup.addEventListener('click', Interface.handleProjPopup)
-    Interface.initClosePopupBtnActions()
+    const projectBtns = document.querySelectorAll("#projectBtn");
+    const newProjPopup = document.getElementById("newProjPopup");
+    const newProjBtn = document.getElementById("newProjBtn");
+    const todayBtn = document.querySelector(".today");
+    newProjBtn.addEventListener("click", Interface.activateProjectPopup);
+    projectBtns.forEach((btn) =>
+      btn.addEventListener("click", Interface.projBtnActions)
+    );
+    newProjPopup.addEventListener("click", Interface.handleProjPopup);
+    todayBtn.addEventListener("click", Interface.openTodayTasks);
+    Interface.initClosePopupBtnActions();
+  }
+
+  static initTaskBtnActions() {
+    const tasks = document.querySelectorAll(".task");
+    const dueDateInputs = document.querySelectorAll(".input-due-date");
+    tasks.forEach((task) =>
+      task.addEventListener("click", Interface.taskBtnActions)
+    );
+    dueDateInputs.forEach((input) => {
+      input.addEventListener("change", Interface.setDueDate);
+    });
   }
 
   // DRAW CONTENT
   static drawProject(title) {
-    const projects = document.getElementById("projectList")
+    const projects = document.getElementById("projectList");
     projects.innerHTML += `
     <button id="projectBtn" class="nav-btn">
             <div class="nav-btn-left">
@@ -73,12 +99,12 @@ export default class Interface {
             <div class="nav-btn-right">
               <i class="fa-solid fa-xmark"></i>
             </div>
-          </button>
-    `
+          </button>`;
+    Interface.initProjectBtnActions();
   }
 
-  static drawTask(title, dueDate="No Due Date") {
-    const tasks = document.querySelector(".task-container")
+  static drawTask(title, dueDate = "No Due Date") {
+    const tasks = document.querySelector(".task-container");
     tasks.innerHTML += `
     <button class="task">
             <div class="task-left">
@@ -87,20 +113,19 @@ export default class Interface {
             </div>
             <div class="task-right">
               <p class="due-date">${dueDate}</p>
+              <input type="date" class="input-due-date">
               <i class="fa-solid fa-xmark remove-task-svg"></i>
             </div>
-          </button>
-    `
+          </button>`;
+    Interface.initTaskBtnActions();
+    Interface.initTaskPopupBtnActions();
   }
 
-  static drawTaskContainer(projTitle) {
-    const taskSection = document.querySelector(".task-section")
-    taskSection.innerHTML += `
-    <h1 class="project-title">${projTitle}</h1>
+  static loadProjectData(projTitle) {
+    const taskSection = document.querySelector(".task-section");
+    taskSection.innerHTML = `
+    <h1 id="projTitle" class="project-title">${projTitle}</h1>
     <div class="task-container"></div>
-    `
-
-    taskSection.innerHTML += `
     <!-- NEW TASK BUTTON -->
     <button id="newTaskBtn" class="new-task-btn">
       <i class="fa-solid fa-circle-plus blue-svg"></i>
@@ -116,117 +141,271 @@ export default class Interface {
         <i class="fa-solid fa-xmark"></i>
       </button>
     </div>
-    `
+    `;
+    Interface.initTasks(projTitle);
   }
 
+  // CLEAR SECTIONS
+  static clearAll() {
+    Interface.clearTasks();
+    Interface.clearProjects();
+    Interface.clearTaskSection();
+  }
 
-  // PROJECT BUTTON ACTIONS
+  static clearTasks() {
+    const tasks = document.querySelector(".task-container");
+    tasks.textContent = "";
+  }
+
+  static clearProjects() {
+    const projects = document.getElementById("projectList");
+    projects.textContent = "";
+  }
+
+  static clearTaskSection() {
+    const taskSection = document.querySelector(".task-section");
+    taskSection.textContent = "";
+  }
+
+  // CLEAR ELEMENTS OR STYLES
+  static clearAllActive() {
+    const navBtns = document.querySelectorAll(".nav-btn");
+    navBtns.forEach((btn) => btn.classList.remove("active"));
+  }
+
+  static clearNewProjInput() {
+    const input = document.querySelector(".new-proj-input");
+    input.value = "";
+  }
+
+  static clearNewTaskInput() {
+    const input = document.querySelector(".new-task-input");
+    input.value = "";
+  }
+
+  static closeAllPopups() {
+    Interface.closeProjectPopup();
+    Interface.closeTaskPopup();
+  }
+
+  // MAIN BUTTON ACTION HANDLERS
   static projBtnActions(e) {
     const title = this.children[0].children[1].textContent;
 
-    if (e.target.classList.contains("fa-xmark") || 
-    e.target.parentNode.classList.contains("fa-xmark")) {
-        // Interface.removeProject()
-        console.log('removed')
+    if (
+      e.target.classList.contains("fa-xmark") ||
+      e.target.parentNode.classList.contains("fa-xmark")
+    ) {
+      Interface.removeProject(title, this);
+      return;
     }
-    // open tasks of the project(title)
-    // Interface.openProject(title, this)
-    Interface.clearAllActive()
-    this.classList.add("active")
+    Interface.openProject(title, this);
+    Interface.clearAllActive();
+    this.classList.add("active");
+  }
+
+  static taskBtnActions(e) {
+    if (
+      e.target.classList.contains("fa-xmark") ||
+      e.target.parentNode.classList.contains("fa-xmark")
+    ) {
+      Interface.removeTask(this);
+      return;
+    }
+    if (
+      e.target.classList.contains("fa-circle") ||
+      e.target.parentNode.classList.contains("fa-circle")
+    ) {
+      console.log("completed task");
+      // Interface.completeTask()
+      return;
+    }
+    if (e.target.classList.contains("due-date")) {
+      Interface.openDateInput(this);
+    }
   }
 
   static defaultProjActions(e) {
-    const title = this.innerText.trim();
-    Interface.clearAllActive()
-    this.classList.add("active")
+    Interface.clearAllActive();
+    this.classList.add("active");
   }
 
-  static clearAllActive() {
-    const navBtns = document.querySelectorAll(".nav-btn")
-    navBtns.forEach((btn) => btn.classList.remove("active"))
+  // POPUP HANDLERS
+  static handleProjPopup(e) {
+    if (
+      e.target.classList.contains("fa-xmark") ||
+      e.target.parentNode.classList.contains("fa-xmark")
+    ) {
+      Interface.closeProjectPopup();
+    }
+    if (
+      e.target.classList.contains("fa-check") ||
+      e.target.parentNode.classList.contains("fa-check")
+    ) {
+      Interface.addProject();
+      Interface.initProjectBtnActions();
+    }
+    Interface.clearNewProjInput();
+  }
+
+  static handleTaskPopup(e) {
+    if (
+      e.target.classList.contains("fa-xmark") ||
+      e.target.parentNode.classList.contains("fa-xmark")
+    ) {
+      Interface.closeTaskPopup();
+    }
+    if (
+      e.target.classList.contains("fa-check") ||
+      e.target.parentNode.classList.contains("fa-check")
+    ) {
+      const input = document.querySelector(".new-task-input");
+      if (input.value == "") {
+        alert("Task name cannot be blank!");
+      }
+      Interface.addTask();
+      // Interface.drawTask(input.value);
+      Interface.closeTaskPopup();
+      Interface.initTaskPopupBtnActions();
+      Interface.initTaskBtnActions();
+    }
+    Interface.clearNewTaskInput();
   }
 
   // POPUPS
   // PROJECT POPUP
   static activateProjectPopup() {
-    const newProjPopup = document.getElementById("newProjPopup")
-    const newProjBtn = document.getElementById("newProjBtn")
+    const newProjPopup = document.getElementById("newProjPopup");
+    const newProjBtn = document.getElementById("newProjBtn");
     newProjPopup.classList.add("active");
-    newProjBtn.style.display = "none"
+    newProjBtn.style.display = "none";
   }
 
   static closeProjectPopup() {
-    const newProjPopup = document.getElementById("newProjPopup")
-    const newProjBtn = document.getElementById("newProjBtn")
-    newProjPopup.classList.remove("active")
-    newProjBtn.style.display = "flex"
-  }
-
-  static clearNewProjInput() {
-    const input = document.querySelector(".new-proj-input")
-    input.value = ""
-  }
-
-  static handleProjPopup(e) {
-    if (e.target.classList.contains("fa-xmark") ||
-    e.target.parentNode.classList.contains("fa-xmark")) {
-      Interface.closeProjectPopup()
-    }
-    if (e.target.classList.contains("fa-check") ||
-    e.target.parentNode.classList.contains("fa-check")) {
-      const input = document.querySelector(".new-proj-input")
-      if (input.value == "") {
-        alert("Project name cannot be blank!")
-      }
-      Interface.drawProject(input.value)
-      Interface.closeProjectPopup()
-      Interface.initProjectBtnActions()
-    }
-    Interface.clearNewProjInput()
+    const newProjPopup = document.getElementById("newProjPopup");
+    const newProjBtn = document.getElementById("newProjBtn");
+    newProjPopup.classList.remove("active");
+    newProjBtn.style.display = "flex";
   }
 
   // TASK POPUP
   static activateTaskPopup() {
-    const newTaskPopup = document.getElementById("newTaskPopup")
-    const newTaskBtn = document.getElementById("newTaskBtn")
+    const newTaskPopup = document.getElementById("newTaskPopup");
+    const newTaskBtn = document.getElementById("newTaskBtn");
     newTaskPopup.classList.add("active");
-    newTaskBtn.style.display = "none"
+    newTaskBtn.style.display = "none";
   }
 
   static closeTaskPopup() {
-    const newTaskPopup = document.getElementById("newTaskPopup")
-    const newTaskBtn = document.getElementById("newTaskBtn")
-    newTaskPopup.classList.remove("active")
-    newTaskBtn.style.display = "flex"
+    const newTaskPopup = document.getElementById("newTaskPopup");
+    const newTaskBtn = document.getElementById("newTaskBtn");
+    newTaskPopup.classList.remove("active");
+    newTaskBtn.style.display = "flex";
   }
 
-  static closeAllPopups() {
-    Interface.closeProjectPopup()
-    Interface.closeTaskPopup()
-  }
-
-  static handleTaskPopup(e) {
-    if (e.target.classList.contains("fa-xmark") ||
-    e.target.parentNode.classList.contains("fa-xmark")) {
-      Interface.closeTaskPopup()
+  // ADD PROJECT
+  static addProject() {
+    const input = document.querySelector(".new-proj-input");
+    const projTitle = input.value;
+    if (projTitle === "") {
+      alert("Project title cannot be empty!");
+      return;
     }
-    if (e.target.classList.contains("fa-check") ||
-    e.target.parentNode.classList.contains("fa-check")) {
-      const input = document.querySelector(".new-task-input")
-      if (input.value == "") {
-        alert("Task name cannot be blank!")
+    if (Storage.getList().contains(projTitle)) {
+      alert("Project title must be different from existing project.");
+      return;
+    }
+    Storage.addProject(new Project(projTitle));
+    Interface.drawProject(projTitle);
+    Interface.closeProjectPopup();
+  }
+
+  static openProject(projTitle, projButton) {
+    const defaultProjs = document.querySelectorAll("#defaultProj");
+    const projectBtns = document.querySelectorAll("#projectBtn");
+    const buttons = [...defaultProjs, ...projectBtns];
+    buttons.forEach((button) => button.classList.remove("active"));
+    projButton.classList.add("active");
+    Interface.closeProjectPopup();
+    Interface.loadProjectData(projTitle);
+  }
+
+  static removeProject(projTitle, button) {
+    if (button.classList.contains("active")) Interface.clearTaskSection();
+    Storage.removeProject(projTitle);
+    Interface.clearProjects();
+    Interface.initProjects();
+  }
+
+  static openTodayTasks() {
+    Storage.updateToday();
+    Interface.openProject("Today", this);
+  }
+
+  static addTask() {
+    const projTitle = document.getElementById("projTitle").textContent;
+    const input = document.querySelector(".new-task-input");
+    const taskTitle = input.value;
+    if (taskTitle === "") {
+      alert("Task title cannot be empty.");
+      return;
+    }
+    if (Storage.getList().getProject(projTitle).contains(taskTitle)) {
+      alert("Task titles must be different.");
+      input.value = "";
+      return;
+    }
+    Storage.addTask(projTitle, new Task(taskTitle));
+    Interface.drawTask(taskTitle);
+    Interface.closeTaskPopup();
+  }
+
+  static removeTask(taskBtn) {
+    const projTitle = document.getElementById("projTitle").textContent.trim();
+    const taskTitle = taskBtn.children[0].children[1].textContent.trim();
+
+    Storage.removeTask(projTitle, taskTitle);
+    Interface.clearTasks();
+    Interface.initTasks(projTitle);
+  }
+
+  static updateToday() {
+    const list = Storage.getList();
+    list.updateToday();
+    Storage.saveList(list);
+  }
+
+  // SET DATE
+  static setDueDate() {
+    const taskBtn = this.parentNode.parentNode;
+    const projTitle = document.getElementById("projTitle").textContent;
+    const taskTitle = taskBtn.children[0].children[1].textContent;
+    const newDueDate = format(new Date(this.value), "MM/dd/yyy");
+
+    if (projTitle === "Today") {
+      Storage.setDueDate(projTitle, taskTitle, newDueDate);
+      if (projTitle === "Today") {
+        Storage.updateToday();
       }
-      console.log(input.value)
-      Interface.drawTask(input.value)
-      Interface.closeTaskPopup()
-      Interface.initTaskBtnActions()
+    } else {
+      Storage.setDueDate(projTitle, taskTitle, newDueDate);
     }
-    Interface.clearNewTaskInput()
+    Interface.clearTasks();
+    Interface.initTasks(projTitle);
+    Interface.closeDateInput(taskBtn);
   }
 
-  static clearNewTaskInput() {
-    const input = document.querySelector(".new-task-input")
-    input.value = ""
+  static openDateInput(task) {
+    const dueDate = task.children[1].children[0];
+    const dueDateInput = task.children[1].children[1];
+    dueDate.classList.add("active");
+    dueDateInput.classList.add("active");
+    console.log("opening");
   }
 
+  static closeDateInput(task) {
+    const dueDate = task.children[1].children[0];
+    console.log(dueDate);
+    console.log("closing");
+  }
 }

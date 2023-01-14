@@ -27,42 +27,42 @@ export default class Storage {
           project.getTasks().map((task) => Object.assign(new Task(), task))
         )
       );
-    return projList
+    return projList;
   }
 
   static addProject(project) {
     const projList = Storage.getList();
-    projList.addProject(project)
-    Storage.saveList(projlist)
+    projList.addProject(project);
+    Storage.saveList(projList);
   }
 
   static removeProject(title) {
     const projList = Storage.getList();
-    projList.removeProject(title)
-    Storage.saveList(projList)
+    projList.removeProject(title);
+    Storage.saveList(projList);
   }
 
   static addTask(projName, task) {
     const projList = Storage.getList();
-    projList.getProject(projName).addTask(task)
-    Storage.saveList(projList)
+    projList.getProject(projName).addTask(task);
+    Storage.saveList(projList);
   }
 
   static removeTask(projName, task) {
     const projList = Storage.getList();
-    projList.getProject(projName).removeTask(task)
-    Storage.saveList(projList)
+    projList.getProject(projName).removeTask(task);
+    Storage.saveList(projList);
   }
 
-  static setTaskDate(projName, taskTitle, dueDate) {
+  static setDueDate(projName, taskTitle, dueDate) {
     const projList = Storage.getList();
-    projList.getProject(projName).getTask(taskTitle).setDate(dueDate)
-    Storage.saveList(projList)
+    projList.getProject(projName).getTask(taskTitle).setDate(dueDate);
+    Storage.saveList(projList);
   }
 
   static updateToday() {
     const projList = Storage.getList();
-    projList.updateToday()
-    Storage.saveList(projList)
+    projList.updateToday();
+    Storage.saveList(projList);
   }
 }
