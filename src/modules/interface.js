@@ -381,7 +381,7 @@ export default class Interface {
     if (projTitle === "Today") {
       Storage.updateToday()
     } else {
-      Storage.deleteTask(projTitle, taskTitle)
+      Storage.removeTask(projTitle, taskTitle)
     }
     Interface.clearTasks()
     Interface.initTasks(projTitle)
